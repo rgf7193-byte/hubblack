@@ -35,7 +35,7 @@ end
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
 mainFrame.Size = UDim2.new(0, 400, 0, 300)
-mainFrame.Position = UDim2.new(1, 50, 0, 75) -- Começa escondida na direita
+mainFrame.Position = UDim2.new(1, 50, 0, 75)
 mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20) 
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
@@ -432,7 +432,7 @@ local RunService = game:GetService("RunService")
 _G.ProcessarTrajetoCompletoLennon = function(ovoID, meuHrp, humanoid, playerGui, player, character)
     local coordenadaIntermediaria = Vector3.new(613.4, 70.6, -304.3) -- Parada 1
     local coordenadaFinal = Vector3.new(499.2, 70.6, -295.1)        -- Parada Final
-    local velocidadeEtapa1 = 4500                                    -- Velocidade inicial até a intermediária
+    local velocidadEtapa1 = 4500                                    -- Velocidade inicial até a intermediária
     local velocidadeEtapa2 = 300                                     -- Velocidade da última corrida
     local conexaoNovaPrompt = nil
 
@@ -524,7 +524,7 @@ _G.ProcessarTrajetoCompletoLennon = function(ovoID, meuHrp, humanoid, playerGui,
 
     -- ETAPA 1: Teleport constante até a coordenada intermediária
     if _G.ActiveSteals[ovoID] then
-        moverComHeartbeat(coordenadaIntermediaria, velocidadeEtapa1)
+        moverComHeartbeat(coordenadaIntermediaria, velocidadEtapa1)
     end
 
     -- CHEGOU NA INTERMEDIÁRIA: Sincronização dos tempos com a trava de física ativa
@@ -567,7 +567,7 @@ end
 _G.ExecutarTeleguiadoLennon = function()
     if not _G.AutoFarmAtivo or tick() < _G.CooldownFarm then return end
     
-    -- 🌟 MODIFICAÇÃO CHAVE: Bloqueia o avanço e a atualização se não houver NENHUM bicho explicitamente selecionado
+    -- Bloqueia o avanço e a atualização se não houver NENHUM bicho explicitamente selecionado
     if not _G.BichoSelecionadoUid then 
         task.wait(0.2)
         return 
@@ -600,9 +600,11 @@ _G.ExecutarTeleguiadoLennon = function()
             bv.MaxForce = Vector3.new(1e6, 1e6, 1e6)
             bv.Parent = meuHrp
 
-            local destinoOvo = posicaoAlvo + Vector3.new(0, 2, 0)
+            -- TRAVA DE SOLO INTERNA: Ignora a altura (Y) do ovo gigante para não voar
+            local destinoOvo = Vector3.new(posicaoAlvo.X, meuHrp.Position.Y, posicaoAlvo.Z)
             
             while _G.AutoFarmAtivo and _G.BichoSelecionadoUid == melhorAlvoUid and (destinoOvo - meuHrp.Position).Magnitude > 3 do
+                destinoOvo = Vector3.new(posicaoAlvo.X, meuHrp.Position.Y, posicaoAlvo.Z)
                 local direcao = (destinoOvo - meuHrp.Position).Unit
                 bv.Velocity = direcao * 300
                 task.wait()
@@ -612,7 +614,6 @@ _G.ExecutarTeleguiadoLennon = function()
             meuHrp.AssemblyLinearVelocity = Vector3.zero
             task.wait(0.40)
 
-            -- Verifica se o farm continua ativo e se o bicho ainda é o selecionado antes de disparar as ações
             if _G.AutoFarmAtivo and _G.BichoSelecionadoUid == melhorAlvoUid then
                 local ovoID = melhorAlvoUid
                 if not _G.ActiveSteals then _G.ActiveSteals = {} end
@@ -640,7 +641,7 @@ local menuButton = _G.DeltaMenuButton
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 
--- 🌟 MODIFICAÇÃO TEXTUAL: Botão renomeado para STEAL (Delta Neon)
+-- Botão ON/OFF de Status Inferior (Delta Neon)
 local toggleButton = Instance.new("TextButton")
 toggleButton.Name = "ToggleButton"
 toggleButton.Size = UDim2.new(0, 350, 0, 42) 
@@ -708,7 +709,7 @@ menuButton.MouseButton1Click:Connect(function()
     TweenService:Create(menuButton, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 end)
 
--- Loops de Execução Ativos
+-- Loop de Execução do Motor Teleguiado
 task.spawn(function()
     while true do
         if _G.AutoFarmAtivo and type(_G.ExecutarTeleguiadoLennon) == "function" then
@@ -718,11 +719,462 @@ task.spawn(function()
     end
 end)
 
+-- LOOP DE REFRESH CONTÍNUO: Agora atualiza as caixinhas o tempo todo sem travar!
 task.spawn(function()
     while true do
-        if not _G.AutoFarmAtivo and type(_G.AtuaisModelos) == "function" then 
+        if type(_G.AtuaisModelos) == "function" then 
             pcall(_G.AtuaisModelos) 
         end
         task.wait(3.0)
     end
 end)
+-- ========================================================
+-- [PARTE 1] INTERFACE BASE REESTRUTURADA E DESTRAVADA (ESP INVISÍVEL)
+-- ========================================================
+_G.TS = game:GetService("TweenService")
+_G.CoreGui = game:GetService("CoreGui")
+_G.UIS = game:GetService("UserInputService")
+_G.player = game:GetService("Players").LocalPlayer
+
+-- Remove janelas antigas para evitar travamentos de sobreposição
+for _, loc in pairs({_G.CoreGui, _G.player:FindFirstChild("PlayerGui")}) do
+    if loc and loc:FindFirstChild("NeonMovingMenu") then loc.NeonMovingMenu:Destroy() end
+end
+local antigo = workspace:FindFirstChild("Tapete_ESP_Perfeito")
+if antigo then antigo:Destroy() end
+
+_G.MenuGui = Instance.new("ScreenGui")
+_G.MenuGui.Name = "NeonMovingMenu"
+_G.MenuGui.ResetOnSpawn = false
+_G.MenuGui.Parent = pcall(function() _G.MenuGui.Parent = _G.CoreGui end) and _G.CoreGui or _G.player:WaitForChild("PlayerGui")
+
+-- 1. RETÂNGULO PRINCIPAL (Borda Branca Neon)
+_G.BorderBox = Instance.new("Frame", _G.MenuGui)
+_G.BorderBox.Name = "BorderBox"
+_G.BorderBox.Size = UDim2.new(0, 200, 0, 45)
+_G.BorderBox.Position = UDim2.new(0.5, -100, 0.5, -22.5)
+_G.BorderBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+_G.BorderBox.BorderSizePixel = 0
+_G.BorderBox.Active = true -- Mantido para o sistema de drag
+
+local BorderCorner = Instance.new("UICorner", _G.BorderBox)
+BorderCorner.CornerRadius = UDim.new(0, 7)
+
+local NeonGradient = Instance.new("UIGradient", _G.BorderBox)
+NeonGradient.Transparency = NumberSequence.new({
+    NumberSequenceKeypoint.new(0, 0),
+    NumberSequenceKeypoint.new(0.3, 0),
+    NumberSequenceKeypoint.new(0.5, 0.7),
+    NumberSequenceKeypoint.new(0.7, 0),
+    NumberSequenceKeypoint.new(1, 0)
+})
+
+task.spawn(function()
+    while _G.MenuGui.Parent do
+        NeonGradient.Rotation = NeonGradient.Rotation + 4
+        task.wait(0.01)
+    end
+end)
+
+-- 2. FRAME INTERNO
+_G.InnerBox = Instance.new("Frame", _G.BorderBox)
+_G.InnerBox.Name = "InnerBox"
+_G.InnerBox.Size = UDim2.new(1, -10, 1, -10)
+_G.InnerBox.Position = UDim2.new(0, 5, 0, 5)
+_G.InnerBox.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+_G.InnerBox.BorderSizePixel = 0
+Instance.new("UICorner", _G.InnerBox).CornerRadius = UDim.new(0, 5)
+
+-- 3. INTERRUPTOR LIGA/DESLIGA (ON/OFF)
+_G.ToggleState = false
+_G.ToggleSwitch = Instance.new("TextButton", _G.InnerBox)
+_G.ToggleSwitch.Name = "ToggleSwitch"
+_G.ToggleSwitch.Size = UDim2.new(0, 65, 0, 25)
+_G.ToggleSwitch.Position = UDim2.new(0, 10, 0.5, -12.5)
+_G.ToggleSwitch.BackgroundColor3 = Color3.fromRGB(40, 40, 45)
+_G.ToggleSwitch.Text = ""
+_G.ToggleSwitch.AutoButtonColor = false
+_G.ToggleSwitch.BorderSizePixel = 0
+_G.ToggleSwitch.ZIndex = 5 -- Garante que fique acima de tudo para aceitar cliques
+Instance.new("UICorner", _G.ToggleSwitch).CornerRadius = UDim.new(1, 0)
+
+_G.StateText = Instance.new("TextLabel", _G.ToggleSwitch)
+_G.StateText.Size = UDim2.new(1, 0, 1, 0)
+_G.StateText.BackgroundTransparency = 1
+_G.StateText.Font = Enum.Font.Code
+_G.StateText.Text = "OFF"
+_G.StateText.TextColor3 = Color3.fromRGB(180, 180, 180)
+_G.StateText.TextSize = 10
+_G.StateText.Position = UDim2.new(0, 12, 0, 0)
+_G.StateText.ZIndex = 6
+
+_G.ToggleSlider = Instance.new("Frame", _G.ToggleSwitch)
+_G.ToggleSlider.Size = UDim2.new(0, 19, 0, 19)
+_G.ToggleSlider.Position = UDim2.new(0, 3, 0.5, -9.5)
+_G.ToggleSlider.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+_G.ToggleSlider.BorderSizePixel = 0
+_G.ToggleSlider.ZIndex = 6
+Instance.new("UICorner", _G.ToggleSlider).CornerRadius = UDim.new(1, 0)
+
+-- 4. EMOJI E BOTÃO DE EXPANDIR (>)
+local LabelText = Instance.new("TextLabel", _G.InnerBox)
+LabelText.Size = UDim2.new(0, 30, 1, 0)
+LabelText.Position = UDim2.new(0, 85, 0, 0)
+LabelText.BackgroundTransparency = 1
+LabelText.Font = Enum.Font.Code
+LabelText.Text = "🍬"
+LabelText.TextSize = 16
+LabelText.TextXAlignment = Enum.TextXAlignment.Left
+
+_G.ExpandButton = Instance.new("TextButton", _G.InnerBox)
+_G.ExpandButton.Name = "ExpandButton"
+_G.ExpandButton.Size = UDim2.new(0, 25, 0, 25)
+_G.ExpandButton.Position = UDim2.new(1, -30, 0.5, -12.5)
+_G.ExpandButton.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
+_G.ExpandButton.Text = ">"
+_G.ExpandButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+_G.ExpandButton.Font = Enum.Font.GothamBold
+_G.ExpandButton.TextSize = 14
+_G.ExpandButton.BorderSizePixel = 0
+_G.ExpandButton.AutoButtonColor = false
+_G.ExpandButton.ZIndex = 5 -- Destrava o clique da seta
+Instance.new("UICorner", _G.ExpandButton).CornerRadius = UDim.new(0, 4)
+
+-- 5. GERAR O TAPETE ESP NO WORKSPACE (CONFIGURADO PARA FICAR INVISÍVEL)
+local P1 = Vector3.new(551.53, 70.57, -580.83)
+local P2 = Vector3.new(551.21, 70.57, -147.11)
+local P3 = Vector3.new(365.40, 70.57, -147.48)
+local P4 = Vector3.new(365.88, 70.57, -574.80)
+
+local Centro = (P1 + P2 + P3 + P4) / 4
+local Largura = ((P1 - P4).Magnitude + (P2 - P3).Magnitude) / 2
+local Comprimento = ((P1 - P2).Magnitude + (P4 - P3).Magnitude) / 2
+
+_G.TapeteESP = Instance.new("Part")
+_G.TapeteESP.Name = "Tapete_ESP_Perfeito"
+_G.TapeteESP.Anchored = true
+_G.TapeteESP.CanCollide = false
+_G.TapeteESP.Material = Enum.Material.Neon
+_G.TapeteESP.Color = Color3.fromRGB(0, 255, 125)
+_G.TapeteESP.Transparency = 1 -- Modificado para 1 (Totalmente Invisível)
+_G.TapeteESP.Size = Vector3.new(Largura, 0.5, Comprimento)
+
+local Direcao = (P2 - P1).Unit
+_G.TapeteESP.CFrame = CFrame.new(Centro, Centro + Direcao)
+_G.TapeteESP.Parent = workspace
+
+-- SISTEMA DE ARRASTAR CORRIGIDO (Evita travar cliques internos)
+local dragging, dragInput, dragStart, startPos
+local function update(input)
+    local delta = input.Position - dragStart
+    _G.TS:Create(_G.BorderBox, TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+        Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    }):Play()
+end
+
+_G.BorderBox.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        -- Só arrasta se clicar na área livre do painel, sem bloquear os botões internos
+        if _G.UIS:GetFocusedTextBox() == nil then
+            dragging = true
+            dragStart = input.Position
+            startPos = _G.BorderBox.Position
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then dragging = false end
+            end)
+        end
+    end
+end)
+
+_G.BorderBox.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+_G.UIS.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+print("[PARTE 1] Interface carregada e Tapete ESP invisível gerado.")-- ========================================================
+-- [PARTE 2] GERADOR DO PAINEL COMPLEMENTAR E SLIDER
+-- ========================================================
+if not _G.BorderBox or not _G.ExpandButton then warn("Execute a Parte 1 primeiro!") return end
+
+_G.ModdedSpeed = 500
+local minVal, maxVal = 500, 1000
+local sliding = false
+
+local LargePanel = Instance.new("Frame", _G.BorderBox)
+LargePanel.Name = "LargePanel"
+LargePanel.Size = UDim2.new(0, 220, 0, 110)
+LargePanel.Position = UDim2.new(1, 10, 0, 0)
+LargePanel.BackgroundColor3 = Color3.fromRGB(12, 12, 16)
+LargePanel.BackgroundTransparency = 1
+LargePanel.ClipsDescendants = true
+LargePanel.BorderSizePixel = 0
+LargePanel.Visible = false
+Instance.new("UICorner", LargePanel).CornerRadius = UDim.new(0, 8)
+
+local PanelStroke = Instance.new("UIStroke", LargePanel)
+PanelStroke.Thickness = 2
+PanelStroke.Color = Color3.fromRGB(45, 45, 50)
+PanelStroke.Transparency = 1
+
+local SliderTitle = Instance.new("TextLabel", LargePanel)
+SliderTitle.Size = UDim2.new(1, 0, 0, 25)
+SliderTitle.Position = UDim2.new(0, 0, 0, 12)
+SliderTitle.BackgroundTransparency = 1
+SliderTitle.Font = Enum.Font.Code
+SliderTitle.Text = "VELOCIDADE AUTO CANDY"
+SliderTitle.TextColor3 = Color3.fromRGB(200, 200, 200)
+SliderTitle.TextSize = 12
+
+_G.SpeedValueText = Instance.new("TextLabel", LargePanel)
+_G.SpeedValueText.Size = UDim2.new(1, 0, 0, 25)
+_G.SpeedValueText.Position = UDim2.new(0, 0, 0, 32)
+_G.SpeedValueText.BackgroundTransparency = 1
+_G.SpeedValueText.Font = Enum.Font.Code
+_G.SpeedValueText.Text = "500"
+_G.SpeedValueText.TextColor3 = Color3.fromRGB(0, 255, 150)
+_G.SpeedValueText.TextSize = 18
+
+local SliderTrack = Instance.new("TextButton", LargePanel)
+SliderTrack.Size = UDim2.new(0, 180, 0, 6)
+SliderTrack.Position = UDim2.new(0.5, -90, 0, 75)
+SliderTrack.BackgroundColor3 = Color3.fromRGB(35, 35, 40)
+SliderTrack.Text = ""
+SliderTrack.BorderSizePixel = 0
+Instance.new("UICorner", SliderTrack).CornerRadius = UDim.new(1, 0)
+
+local SliderFill = Instance.new("Frame", SliderTrack)
+SliderFill.Size = UDim2.new(0, 0, 1, 0)
+SliderFill.BackgroundColor3 = Color3.fromRGB(0, 191, 255)
+SliderFill.BorderSizePixel = 0
+Instance.new("UICorner", SliderFill).CornerRadius = UDim.new(1, 0)
+
+local SliderButton = Instance.new("TextButton", SliderTrack)
+SliderButton.Size = UDim2.new(0, 14, 0, 14)
+SliderButton.Position = UDim2.new(0, -7, 0.5, -7)
+SliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+SliderButton.Text = ""
+SliderButton.BorderSizePixel = 0
+Instance.new("UICorner", SliderButton).CornerRadius = UDim.new(1, 0)
+
+local function updateSlider(input)
+    local percentage = math.clamp((input.Position.X - SliderTrack.AbsolutePosition.X) / SliderTrack.AbsoluteSize.X, 0, 1)
+    SliderButton.Position = UDim2.new(percentage, -7, 0.5, -7)
+    SliderFill.Size = UDim2.new(percentage, 0, 1, 0)
+    _G.ModdedSpeed = math.floor(minVal + (percentage * (maxVal - minVal)))
+    _G.SpeedValueText.Text = tostring(_G.ModdedSpeed)
+end
+
+SliderButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then sliding = true end
+end)
+_G.UIS.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then sliding = false end
+end)
+_G.UIS.InputChanged:Connect(function(input)
+    if sliding and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then updateSlider(input) end
+end)
+SliderTrack.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then updateSlider(input) sliding = true end
+end)
+
+local panelOpen = false
+_G.ExpandButton.MouseButton1Click:Connect(function()
+    panelOpen = not panelOpen
+    if panelOpen then
+        _G.ExpandButton.Text = "<" LargePanel.Visible = true
+        _G.TS:Create(LargePanel, TweenInfo.new(0.3, Enum.EasingStyle.Quart), {BackgroundTransparency = 0.05}):Play()
+        _G.TS:Create(PanelStroke, TweenInfo.new(0.3, Enum.EasingStyle.Quart), {Transparency = 0}):Play()
+    else
+        _G.ExpandButton.Text = ">"
+        local t = _G.TS:Create(LargePanel, TweenInfo.new(0.2, Enum.EasingStyle.Quad), {BackgroundTransparency = 1})
+        _G.TS:Create(PanelStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad), {Transparency = 1}):Play()
+        t:Play() t.Completed:Connect(function() if not panelOpen then LargePanel.Visible = false end end)
+    end
+end)
+
+print("[PARTE 2 SUCESSO] Painel grande e Slider ativos.")
+-- ========================================================
+-- [PARTE 3] CÓDIGO ORIGINAL - APENAS MOVIMENTAÇÃO E FUGA VIA MOVETO
+-- ========================================================
+if not _G.ToggleSwitch or _G.ModdedSpeed == nil or not _G.TapeteESP then warn("Execute a Parte 1 e a Parte 2 primeiro!") return end
+
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local currentTargetPart = nil
+local fustigoFugaAtivo = false
+local PontoEscape = Vector3.new(534.4, 70.6, -326.3)
+local listaNegraUtilitarios = {"Trap", "Armadilha", "Chicken", "Bixo", "Pet", "Sample", "Boost", "Nitro", "Mutation", "Mutacao", "Train", "Haunted Rod", "Rod"}
+
+-- Função para checar colisão tridimensional dentro do Tapete ESP
+local function checarColisaoComTapete(hrpPart)
+    if not _G.TapeteESP or not _G.TapeteESP.Parent then return false end
+    local posLocal = _G.TapeteESP.CFrame:PointToObjectSpace(hrpPart.Position)
+    local tamanho = _G.TapeteESP.Size
+    return math.abs(posLocal.X) <= (tamanho.X / 2) and math.abs(posLocal.Z) <= (tamanho.Z / 2)
+end
+
+-- Mantém a função original de obter o bastão para equipar automaticamente
+local function obterBastaoAtual()
+    local char = LocalPlayer.Character
+    local bp = LocalPlayer.Backpack
+    local padrao = "%[X%d+%]"
+    if bp then 
+        for _, i in pairs(bp:GetChildren()) do 
+            if i:IsA("Tool") and string.find(i.Name, padrao) then 
+                local black = false 
+                for _, p in ipairs(listaNegraUtilitarios) do if string.find(string.lower(i.Name), string.lower(p)) then black = true end end 
+                if not black then return i end 
+            end 
+        end 
+    end
+    if char then 
+        for _, i in pairs(char:GetChildren()) do 
+            if i:IsA("Tool") and string.find(i.Name, padrao) then 
+                local black = false 
+                for _, p in ipairs(listaNegraUtilitarios) do if string.find(string.lower(i.Name), string.lower(p)) then black = true end end 
+                if not black then return i end 
+            end 
+        end 
+    end
+    return nil
+end
+
+-- Loop exclusivo para garantir que o bastão esteja sempre equipado (Sem clicar/atacar)
+task.spawn(function()
+    while true do
+        task.wait(0.1)
+        if _G.ToggleState then
+            local char = LocalPlayer.Character
+            if char then
+                local b = obterBastaoAtual()
+                local hum = char:FindFirstChildOfClass("Humanoid")
+                if b and hum and hum.Health > 0 and b.Parent == LocalPlayer.Backpack then
+                    hum:EquipTool(b)
+                end
+            end
+        end
+    end
+end)
+
+local function getMonsterPart(obj)
+    if obj.Name == "Candy Corn" or (obj.Parent and obj.Parent.Name == "Monsters") then
+        local mIn = obj:FindFirstChildOfClass("Model") or obj
+        if mIn:IsA("Model") then
+            if mIn.PrimaryPart then return mIn.PrimaryPart end
+            for _, p in pairs(mIn:GetChildren()) do if p:IsA("BasePart") then return p end end
+        elseif mIn:IsA("BasePart") then return mIn end
+    end
+    return nil
+end
+
+local function scanSingleTarget()
+    local char = LocalPlayer.Character
+    if not char or not char:FindFirstChild("HumanoidRootPart") then return nil end
+    local hrp, closest, short = char.HumanoidRootPart, nil, math.huge
+    local mFolder = Workspace:FindFirstChild("Monsters")
+    if mFolder then for _, o in pairs(mFolder:GetChildren()) do local t = getMonsterPart(o) if t then local d = (hrp.Position - t.Position).Magnitude if d < short then short = d closest = t end end end end
+    if not closest then for _, o in pairs(Workspace:GetDescendants()) do local t = getMonsterPart(o) if t then local d = (hrp.Position - t.Position).Magnitude if d < short then short = d closest = t end end end end
+    return closest
+end
+
+-- Loop de Movimentação (CFrame para monstros e MoveTo seguro para fuga)
+RunService.Heartbeat:Connect(function(dt)
+    if not _G.ToggleState then currentTargetPart = nil fustigoFugaAtivo = false _G.AguardandoSeguranca = false return end
+    local char = LocalPlayer.Character
+    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+    local hum = char and char:FindFirstChildOfClass("Humanoid")
+    
+    if not hrp or not hum or hum.Health <= 0 then return end
+    if _G.AguardandoSeguranca then return end
+    
+    local estaRelandoNoESP = checarColisaoComTapete(hrp)
+    
+    if estaRelandoNoESP then
+        fustigoFugaAtivo = true
+        currentTargetPart = nil
+    else
+        fustigoFugaAtivo = false
+    end
+    
+    if fustigoFugaAtivo then
+        local cPos = hrp.Position
+        local vecEscape = PontoEscape - cPos
+        
+        if vecEscape.Magnitude > 3 then
+            -- Configura a velocidade nativa de corrida para 200 de forma segura
+            hum.WalkSpeed = 200
+            -- Executa a corrida real pelo chão até o ponto seguro
+            hum:MoveTo(PontoEscape)
+        else
+            -- Chegou na coordenada: limpa a fuga e inicia os 3 segundos
+            fustigoFugaAtivo = false
+            _G.AguardandoSeguranca = true
+            hum:MoveTo(cPos) -- Força a parada imediata dos pés
+            
+            task.spawn(function()
+                task.wait(3)
+                _G.AguardandoSeguranca = false
+            end)
+        end
+    else
+        -- CAÇA NORMAL DOS MONSTROS ORIGINAL POR CFRAME (Mantendo 5 studs de distância)
+        if not currentTargetPart or not currentTargetPart:IsDescendantOf(Workspace) then currentTargetPart = scanSingleTarget() end
+        if currentTargetPart then
+            local tPosRaw = currentTargetPart.Position
+            local cPos = hrp.Position
+            local tPos = Vector3.new(tPosRaw.X, cPos.Y, tPosRaw.Z)
+            
+            local vec = tPos - cPos
+            local distanciaAtual = vec.Magnitude
+            
+            if distanciaAtual > 5 then
+                local direcao = vec.Unit
+                local pontoParada = tPos - (direcao * 5)
+                local vetorAtePonto = pontoParada - cPos
+                local step = _G.ModdedSpeed * dt 
+                if step >= vetorAtePonto.Magnitude then 
+                    hrp.CFrame = CFrame.new(pontoParada, Vector3.new(tPos.X, cPos.Y, tPos.Z)) 
+                else 
+                    hrp.CFrame = CFrame.new(cPos + (direcao * step), Vector3.new(tPos.X, cPos.Y, tPos.Z)) 
+                end
+            else
+                hrp.CFrame = CFrame.new(cPos, Vector3.new(tPos.X, cPos.Y, tPos.Z))
+            end
+        end
+    end
+end)
+
+_G.ToggleSwitch.MouseButton1Click:Connect(function()
+    _G.ToggleState = not _G.ToggleState
+    local targetPos, targetBgColor, targetTxtColor, textValue
+    if _G.ToggleState then
+        targetPos = UDim2.new(1, -22, 0.5, -9.5)
+        targetBgColor = Color3.fromRGB(0, 200, 100)
+        targetTxtColor = Color3.fromRGB(255, 255, 255)
+        textValue = "ON"
+    else
+        targetPos = UDim2.new(0, 3, 0.5, -9.5)
+        targetBgColor = Color3.fromRGB(40, 40, 45)
+        targetTxtColor = Color3.fromRGB(180, 180, 180)
+        textValue = "OFF"
+        currentTargetPart = nil
+        fustigoFugaAtivo = false
+        _G.AguardandoSeguranca = false
+    end
+    _G.StateText.Text = textValue
+    _G.TS:Create(_G.StateText, TweenInfo.new(0.2), {Position = _G.ToggleState and UDim2.new(0, -12, 0, 0) or UDim2.new(0, 12, 0, 0), TextColor3 = targetTxtColor}):Play()
+    _G.TS:Create(_G.ToggleSlider, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = targetPos}):Play()
+    _G.TS:Create(_G.ToggleSwitch, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = targetBgColor}):Play()
+end)
+
+print("[PARTE 3] Sistema de ataque removido. Movimentação original e MoveTo ativos.")
