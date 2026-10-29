@@ -1,625 +1,728 @@
-local _ll1l11l1 = game;local _l1lll1ll = _ll1l11l1.GetService;local _11l1l1ll = _l1lll1ll(_ll1l11l1, "Players");local _l111l1ll = _11l1l1ll.LocalPlayer;local _l1lll11l = _ll1l11l1.CoreGui or _l111l1ll:WaitForChild("PlayerGui");local _l1lll111 = Instance.new("ScreenGui");local _l1l11l11 = Instance.new("Frame");_l1lll111.Name = "DeltaCustomPanel";_l1lll111.Parent = _l1lll11l;_l1lll111.ResetOnSpawn = false;_l1l11l11.Name = "MainPanel";_l1l11l11.Parent = _l1lll111;_l1l11l11.BackgroundColor3 = Color3.fromRGB(0, 0, 0);_l1l11l11.BackgroundTransparency = 0.1;_l1l11l11.Position = UDim2.new(0.5, -150, 0.5, -200);_l1l11l11.Size = UDim2.new(0, 300, 0, 400);_l1l11l11.BorderSizePixel = 0;_l1l11l11.Active = true;_l1l11l11.Draggable = true;local _l1111l1l = Instance.new("UICorner");_l1111l1l.CornerRadius = UDim.new(0, 8);_l1111l1l.Parent = _l1l11l11;local _l1111l11 = Instance.new("UIStroke");_l1111l11.Name = "PanelBorder";_l1111l11.Parent = _l1l11l11;_l1111l11.Color = Color3.fromRGB(130, 0, 255);_l1111l11.Thickness = 1.5;_l1111l11.ApplyStrokeMode = Enum.ApplyStrokeMode.Border;local _l1111ll1 = Instance.new("ImageLabel");_l1111ll1.Name = "TopLeftImage";_l1111ll1.Parent = _l1l11l11;_l1111ll1.BackgroundTransparency = 1;_l1111ll1.Position = UDim2.new(0, 10, 0, 10);_l1111ll1.Size = UDim2.new(0, 40, 0, 40);_l1111ll1.Image = "rbxassetid://107510811944683";local _l1111lll = Instance.new("Frame");_l1111lll.Name = "TitleContainer";_l1111lll.Parent = _l1l11l11;_l1111lll.BackgroundTransparency = 1;_l1111lll.Position = UDim2.new(0, 60, 0, 10);_l1111lll.Size = UDim2.new(1, -70, 0, 40);local _l11111ll = Instance.new("TextLabel");_l11111ll.Name = "BlackText";_l11111ll.Parent = _l1111lll;_l11111ll.BackgroundTransparency = 1;_l11111ll.Position = UDim2.new(0, 25, 0, 0);_l11111ll.Size = UDim2.new(0, 65, 1, 0);_l11111ll.Font = Enum.Font.SourceSansBold;_l11111ll.Text = "BLACK";_l11111ll.TextColor3 = Color3.fromRGB(130, 0, 255);_l11111ll.TextSize = 20;_l11111ll.TextXAlignment = Enum.TextXAlignment.Left;_l11111ll.TextYAlignment = Enum.TextYAlignment.Center;local _l11111l1 = Instance.new("TextLabel");_l11111l1.Name = "PainelText";_l11111l1.Parent = _l1111lll;_l11111l1.BackgroundTransparency = 1;_l11111l1.Position = UDim2.new(0, 92, 0, 0);_l11111l1.Size = UDim2.new(0, 80, 1, 0);_l11111l1.Font = Enum.Font.SourceSansBold;_l11111l1.Text = "PAINEL";_l11111l1.TextColor3 = Color3.fromRGB(255, 255, 255);_l11111l1.TextSize = 20;_l11111l1.TextXAlignment = Enum.TextXAlignment.Left;_l11111l1.TextYAlignment = Enum.TextYAlignment.Center;local _l111111l = Instance.new("Frame");_l111111l.Name = "BigGrayBox";_l111111l.Parent = _l1l11l11;_l111111l.BackgroundColor3 = Color3.fromRGB(45, 45, 45);_l111111l.BackgroundTransparency = 0.2;_l111111l.Position = UDim2.new(0, 12, 0, 60);_l111111l.Size = UDim2.new(1, -24, 0, 270);_l111111l.BorderSizePixel = 0;local _l1111111 = Instance.new("UICorner");_l1111111.CornerRadius = UDim.new(0, 6);_l1111111.Parent = _l111111l;_G.BlackScrollFrame = Instance.new("ScrollingFrame");_G.BlackScrollFrame.Name = "ScrollFrame";_G.BlackScrollFrame.Parent = _l111111l;_G.BlackScrollFrame.BackgroundTransparency = 1;_G.BlackScrollFrame.Position = UDim2.new(0, 8, 0, 8);_G.BlackScrollFrame.Size = UDim2.new(1, -16, 1, -16);_G.BlackScrollFrame.BorderSizePixel = 0;_G.BlackScrollFrame.ScrollBarThickness = 4;_G.BlackScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(130, 0, 255);_G.BlackScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0);local _ll111111 = Instance.new("UIListLayout");_ll111111.Parent = _G.BlackScrollFrame;_ll111111.SortOrder = Enum.SortOrder.LayoutOrder;_ll111111.Padding = UDim.new(0, 8);_G.GoButton = Instance.new("TextButton");_G.GoButton.Name = "GoButton";_G.GoButton.Parent = _l1l11l11;_G.GoButton.BackgroundColor3 = Color3.fromRGB(130, 0, 255);_G.GoButton.Position = UDim2.new(0, 12, 0, 342);_G.GoButton.Size = UDim2.new(0, 133, 0, 45);_G.GoButton.Font = Enum.Font.SourceSansBold;_G.GoButton.Text = "GO";_G.GoButton.TextColor3 = Color3.fromRGB(255, 255, 255);_G.GoButton.TextSize = 20;_G.GoButton.BorderSizePixel = 0;local _ll11111l = Instance.new("UICorner");_ll11111l.CornerRadius = UDim.new(0, 6);_ll11111l.Parent = _G.GoButton;_G.StopButton = Instance.new("TextButton");_G.StopButton.Name = "StopButton";_G.StopButton.Parent = _l1l11l11;_G.StopButton.BackgroundColor3 = Color3.fromRGB(130, 0, 255);_G.StopButton.Position = UDim2.new(0, 155, 0, 342);_G.StopButton.Size = UDim2.new(0, 133, 0, 45);_G.StopButton.Font = Enum.Font.SourceSansBold;_G.StopButton.Text = "STOP";_G.StopButton.TextColor3 = Color3.fromRGB(255, 255, 255);_G.StopButton.TextSize = 20;_G.StopButton.BorderSizePixel = 0;local _ll1111l1 = Instance.new("UICorner");_ll1111l1.CornerRadius = UDim.new(0, 6);_ll1111l1.Parent = _G.StopButton;
-local _l1 = game:GetService("ReplicatedStorage");_G.MinhaPosicao = Vector3.new(535.6, 70.6, -364.3);_G.AutoFarmAtivo = false;_G.CooldownFarm = 0;_G.LennonEggsList = {};_G.BichosSelecionados = _G.BichosSelecionados or {};if not _G.UI_DeltaPool then _G.UI_DeltaPool = {} end;if not _G.ActiveSteals then _G.ActiveSteals = {} end;local _l2 = _l1:WaitForChild("Packages"):WaitForChild("Networking");_G.AskFieldEggSnapshot = _l2:WaitForChild("RF/EggWorld/AskFieldEggSnapshot", 10);_G.AssetsData = nil;local _l3 = _l1:FindFirstChild("Data");local _l4 = _l3 and _l3:FindFirstChild("Assets") or _l1:FindFirstChild("Assets");if _l4 and _l4:IsA("ModuleScript") then local _ok, _res = pcall(require, _l4);if _ok then _G.AssetsData = _res end end;_G.MutationsModule = require(_l1:WaitForChild("Shared"):WaitForChild("Modules"):WaitForChild("Mutations"));_G.RarityModule = require(_l1:WaitForChild("Data"):WaitForChild("Rarity"));function _G.GetScaleMultiplier(_x1)local _n1 = tonumber(_x1) or 1;if _n1 <= 5 then return _n1 ^ 1.85 end;return (_n1 / 5) ^ 1.2 * 19.637875755794113 end;function _G.FormatNumber(_x2)local _n2 = tonumber(_x2) or 0;local _abs = math.abs(_n2);for _, _v in ipairs({{1e12, "T"}, {1e9, "B"}, {1000000, "M"}, {1000, "K"}}) do if _abs >= _v[1] then return (string.format("%.2f", _n2 / _v[1]):gsub("(%..-)0+$", "%1"):gsub("%.$", "")) .. _v[2] end end;return tostring(math.floor(_n2 + 0.5)) end;function _G.GetEggData(_rec)local _dir = _G.AssetsData and _G.AssetsData.Directory and _G.AssetsData.Directory[_rec.AssetCategory];if not _dir then return nil end;local _rate = tonumber(_dir.EarningRate) or 0;local _scale = tonumber(_rec.AssetScale) or 1;local _mut = 1;if _G.MutationsModule and type(_G.MutationsModule.EarningsFor) == "function" then local _ok, _res = pcall(_G.MutationsModule.EarningsFor, _rec.Mutations);if _ok then _mut = tonumber(_res) or 1 end end;local _gen = _rate * _G.GetScaleMultiplier(_scale) * _mut;local _col = Color3.fromRGB(170, 190, 178);local _rname = "COMUM";if _dir.Rarity then _rname = _dir.Rarity.DisplayName or _dir.Rarity.Name or "";local _rarities = _G.RarityModule and _G.RarityModule.Rarities or {};local _rdados = _rarities[_dir.Rarity.Name or ""];local _val = _rdados and _rdados.Color;if typeof(_val) == "ColorSequence" then _col = _val.Keypoints[1].Value elseif typeof(_val) == "Color3" then _col = _val end end;return {Uid = _rec.Uid, Category = _rec.AssetCategory, Name = _dir.DisplayName or _rec.AssetCategory, Generation = math.round(_gen), Position = _rec.BottomCFrame.Position, RarityName = string.upper(_rname), RarityColor = _col} end;
-local _w = game:GetService("Workspace")
-_G.AtuaisModelos = function() 
-    if not _G.AskFieldEggSnapshot or not _G.BlackScrollFrame or not _G.GetEggData or not _G.FormatNumber then return end
-    
-    local _ok, _res = pcall(function() return _G.AskFieldEggSnapshot:InvokeServer() end)
-    if not _ok or not _res or not _res.Records then return end
-    
-    local _list = {}
-    table.clear(_G.LennonEggsList)
-    
-    for _, _rec in ipairs(_res.Records) do 
-        if _rec.State == "Slot" or _rec.State == "Dropped" then 
-            local _data = _G.GetEggData(_rec)
-            if _data then 
-                table.insert(_list, {Data = _data, Dist = (_data.Position - _G.MinhaPosicao).Magnitude})
-                _G.LennonEggsList[_data.Uid] = {Uid = _data.Uid, Position = _data.Position, Generation = _data.Generation} 
-            end 
-        end 
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+
+-- SISTEMA ANTI-REPLICA: Remove todas as versões antigas da tela antes de rodar
+for _, oldGui in pairs(CoreGui:GetChildren()) do
+    if oldGui.Name == "DeltaNeonMenu" then
+        oldGui:Destroy()
     end
-    
-    table.sort(_list, function(_a, _b) return _a.Data.Generation > _b.Data.Generation end)
-    local _folder = _w:WaitForChild("AreaEggSlotsClient", 5)
-    local _actives = {}
-    local _c = 0
-    
-    for _idx, _item in ipairs(_list) do 
-        _c = _c + 1
-        local _d = _item.Data
-        local _uid = _d.Uid
-        _actives[_uid] = true
-        
-        local _el = _G.UI_DeltaPool[_uid]
-        if not _el then 
-            local _btn = Instance.new("TextButton")
-            _btn.Name = "Bicho_" .. _uid
-            _btn.Parent = _G.BlackScrollFrame
-            _btn.Text = ""
-            _btn.Size = UDim2.new(1, 0, 0, 80)
-            _btn.BorderSizePixel = 0
-            _btn.AutoButtonColor = false
-            
-            local _corn = Instance.new("UICorner")
-            _corn.CornerRadius = UDim.new(0, 6)
-            _corn.Parent = _btn
-            
-            local _strk = Instance.new("UIStroke")
-            _strk.Thickness = 1.5
-            _strk.Parent = _btn
-            
-            local _sqr = Instance.new("Frame")
-            _sqr.Name = "PurpleSquare"
-            _sqr.Parent = _btn
-            _sqr.BackgroundColor3 = Color3.fromRGB(130, 0, 255)
-            _sqr.Position = UDim2.new(0, 10, 0, 10)
-            _sqr.Size = UDim2.new(0, 60, 0, 60)
-            _sqr.BorderSizePixel = 0
-            
-            local _scorn = Instance.new("UICorner")
-            _scorn.CornerRadius = UDim.new(0, 6)
-            _scorn.Parent = _sqr
-            
-            local _vpf = Instance.new("ViewportFrame")
-            _vpf.Name = "Render3D"
-            _vpf.Parent = _sqr
-            _vpf.Size = UDim2.new(1, 0, 1, 0)
-            _vpf.BackgroundTransparency = 1
-            _vpf.BorderSizePixel = 0
-            
-            local _stc = Instance.new("Frame")
-            _stc.Name = "StatsContainer"
-            _stc.Parent = _btn
-            _stc.BackgroundTransparency = 1
-            _stc.Position = UDim2.new(1, -160, 0, 10)
-            _stc.Size = UDim2.new(0, 150, 0, 60)
-            
-            local _vl = Instance.new("TextLabel")
-            _vl.Name = "ValorLabel"
-            _vl.Parent = _stc
-            _vl.BackgroundTransparency = 1
-            _vl.Size = UDim2.new(1, 0, 0, 30)
-            _vl.Font = Enum.Font.SourceSansBold
-            _vl.TextColor3 = Color3.fromRGB(85, 255, 127)
-            _vl.TextSize = 16
-            _vl.TextXAlignment = Enum.TextXAlignment.Right
-            _vl.TextYAlignment = Enum.TextYAlignment.Center
-            
-            local _rl = Instance.new("TextLabel")
-            _rl.Name = "RaridadeLabel"
-            _rl.Parent = _stc
-            _rl.BackgroundTransparency = 1
-            _rl.Position = UDim2.new(0, 0, 0, 25)
-            _rl.Size = UDim2.new(1, 0, 0, 30)
-            _rl.Font = Enum.Font.SourceSansBold
-            _rl.TextSize = 14
-            _rl.TextXAlignment = Enum.TextXAlignment.Right
-            _rl.TextYAlignment = Enum.TextYAlignment.Center
-            
-            _btn.MouseButton1Click:Connect(function() 
-                if _G.BichosSelecionados[_uid] then 
-                    _G.BichosSelecionados[_uid] = nil
-                    _btn.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-                    _strk.Color = Color3.fromRGB(45, 45, 45)
-                else 
-                    _G.BichosSelecionados[_uid] = true
-                    _btn.BackgroundColor3 = Color3.fromRGB(28, 15, 45)
-                    _strk.Color = Color3.fromRGB(130, 0, 255)
-                end 
-            end)
-            
-            _el = {Frame = _btn, Stroke = _strk, Viewport = _vpf, ValorLabel = _vl, RaridadeLabel = _rl, LastCategory = ""}
-            _G.UI_DeltaPool[_uid] = _el 
+end
+local player = Players.LocalPlayer
+if player and player:FindFirstChild("PlayerGui") then
+    for _, oldGui in pairs(player.PlayerGui:GetChildren()) do
+        if oldGui.Name == "DeltaNeonMenu" then
+            oldGui:Destroy()
         end
-        
-        -- MODIFICAÇÃO CHAVE: Só mexe na visibilidade se ela estiver errada, evitando o flashing
-        if not _el.Frame.Visible then
-            _el.Frame.Visible = true
-        end
-        
-        _el.Frame.LayoutOrder = _c
-        _el.ValorLabel.Text = "$" .. _G.FormatNumber(_d.Generation) .. "/s"
-        _el.RaridadeLabel.Text = _d.RarityName
-        _el.RaridadeLabel.TextColor3 = _d.RarityColor
-        
-        if _G.BichosSelecionados[_uid] then 
-            _el.Frame.BackgroundColor3 = Color3.fromRGB(28, 15, 45)
-            _el.Stroke.Color = Color3.fromRGB(130, 0, 255)
-        else 
-            _el.Frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-            _el.Stroke.Color = Color3.fromRGB(45, 45, 45)
-        end
-        
-        if _el.LastCategory ~= _d.Category or #_el.Viewport:GetChildren() == 0 then 
-            _el.LastCategory = _d.Category
-            for _, _o in ipairs(_el.Viewport:GetChildren()) do _o:Destroy() end
-            
-            local _phys = _folder and _folder:FindFirstChild(_uid)
-            if _phys then 
-                task.spawn(function() 
-                    local _s, _clone = pcall(function() return _phys:Clone() end)
-                    if _s and _clone and _el.Viewport.Parent then 
-                        _clone.Parent = _el.Viewport
-                        local _cam = Instance.new("Camera")
-                        _el.Viewport.CurrentCamera = _cam
-                        _cam.Parent = _el.Viewport
-                        local _cf, _sz = _clone:GetBoundingBox()
-                        local _dst = math.max(_sz.X, _sz.Y, _sz.Z) * 1.5
-                        _cam.CFrame = CFrame.new(_cf.Position + Vector3.new(0, _dst * 0.5, _dst), _cf.Position) 
-                    end 
-                end) 
-            end 
-        end
-        if _idx % 4 == 0 then task.wait() end 
     end
-    
-    for _id, _dp in pairs(_G.UI_DeltaPool) do 
-        if not _actives[_id] then 
-            if _dp.Frame then _dp.Frame:Destroy() end
-            _G.UI_DeltaPool[_id] = nil 
-        end 
-    end
-    _G.BlackScrollFrame.CanvasSize = UDim2.new(0, 0, 0, (_c * 88))
 end
 
-task.spawn(function() 
-    while true do 
+-- Criando a ScreenGui principal
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "DeltaNeonMenu"
+screenGui.ResetOnSpawn = false
+
+local success, err = pcall(function()
+    screenGui.Parent = CoreGui
+end)
+if not success then
+    screenGui.Parent = player:WaitForChild("PlayerGui")
+end
+
+-- Janela Principal (Largura 400, Altura 300)
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 400, 0, 300)
+mainFrame.Position = UDim2.new(1, 50, 0, 75) -- Começa escondida na direita
+mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20) 
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Parent = screenGui
+
+local uiCornerMain = Instance.new("UICorner")
+uiCornerMain.CornerRadius = UDim.new(0, 16) 
+uiCornerMain.Parent = mainFrame
+
+local uiStrokeMain = Instance.new("UIStroke")
+uiStrokeMain.Thickness = 5 
+uiStrokeMain.Color = Color3.fromRGB(255, 255, 255)
+uiStrokeMain.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+uiStrokeMain.Parent = mainFrame
+
+-- Efeito Neon Preto passando pelas bordas principais
+local uiGradient = Instance.new("UIGradient")
+uiGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
+    ColorSequenceKeypoint.new(0.3, Color3.fromRGB(255, 255, 255)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0, 0, 0)),     
+    ColorSequenceKeypoint.new(0.7, Color3.fromRGB(255, 255, 255)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 255, 255))
+})
+uiGradient.Offset = Vector2.new(-1, 0)
+uiGradient.Parent = uiStrokeMain
+
+local tweenInfoMain = TweenInfo.new(2.5, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1)
+local tweenMain = TweenService:Create(uiGradient, tweenInfoMain, {Offset = Vector2.new(1, 0)})
+tweenMain:Play()
+
+-- Botão de Abrir/Fechar Fixo
+local menuButton = Instance.new("TextButton")
+menuButton.Name = "MenuButton"
+menuButton.Size = UDim2.new(0, 45, 0, 45) 
+menuButton.Position = UDim2.new(1, -65, 0, 20) 
+menuButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+menuButton.Text = "☰" 
+menuButton.TextColor3 = Color3.fromRGB(25, 25, 25)
+menuButton.Font = Enum.Font.GothamBold
+menuButton.TextSize = 20
+menuButton.AutoButtonColor = false
+menuButton.Parent = screenGui
+
+local uiCornerBtnMenu = Instance.new("UICorner")
+uiCornerBtnMenu.CornerRadius = UDim.new(0, 10)
+uiCornerBtnMenu.Parent = menuButton
+
+local uiStrokeBtnMenu = Instance.new("UIStroke")
+uiStrokeBtnMenu.Thickness = 2
+uiStrokeBtnMenu.Color = Color3.fromRGB(255, 255, 255)
+uiStrokeBtnMenu.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+uiStrokeBtnMenu.Parent = menuButton
+
+-- Compartilhando referências nas variáveis globais
+_G.DeltaScreenGui = screenGui
+_G.DeltaMainFrame = mainFrame
+_G.DeltaMenuButton = menuButton
+local mainFrame = _G.DeltaMainFrame
+local TweenService = game:GetService("TweenService")
+
+-- Configurações de Estado do Farm e Posições do Jogo
+_G.AutoFarmAtivo = false
+_G.CooldownFarm = 0
+_G.LennonEggsList = {}
+_G.BichoSelecionadoUid = nil -- Armazena a seleção única por UID
+_G.ActiveSteals = {}
+_G.MinhaPosicao = Vector3.new(535.6, 70.6, -364.3)
+
+-- Painel Interno Cinza
+local innerSquare = Instance.new("Frame")
+innerSquare.Name = "InnerSquare"
+innerSquare.Size = UDim2.new(0, 350, 0, 200) 
+innerSquare.Position = UDim2.new(0.5, -175, 0, 20) 
+innerSquare.BackgroundColor3 = Color3.fromRGB(60, 60, 60) 
+innerSquare.BorderSizePixel = 0
+innerSquare.Parent = mainFrame
+
+local uiCornerInner = Instance.new("UICorner")
+uiCornerInner.CornerRadius = UDim.new(0, 12) 
+uiCornerInner.Parent = innerSquare
+
+local uiStrokeInner = Instance.new("UIStroke")
+uiStrokeInner.Thickness = 3 
+uiStrokeInner.Color = Color3.fromRGB(255, 255, 255)
+uiStrokeInner.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+uiStrokeInner.Parent = innerSquare
+
+-- Container de Scroll
+_G.ScrollContainer = Instance.new("ScrollingFrame")
+_G.ScrollContainer.Name = "ScrollContainer"
+_G.ScrollContainer.Size = UDim2.new(1, -10, 1, -20) 
+_G.ScrollContainer.Position = UDim2.new(0, 5, 0, 10)
+_G.ScrollContainer.BackgroundTransparency = 1
+_G.ScrollContainer.BorderSizePixel = 0
+_G.ScrollContainer.ScrollBarThickness = 4
+_G.ScrollContainer.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255) 
+_G.ScrollContainer.CanvasSize = UDim2.new(0, 0, 0, 0) 
+_G.ScrollContainer.Parent = innerSquare
+
+local uiListLayout = Instance.new("UIListLayout")
+uiListLayout.Parent = _G.ScrollContainer
+uiListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+uiListLayout.Padding = UDim.new(0, 10) 
+uiListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+uiListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+    _G.ScrollContainer.CanvasSize = UDim2.new(0, 0, 0, uiListLayout.AbsoluteContentSize.Y + 20)
+end)
+
+local uiPadding = Instance.new("UIPadding")
+uiPadding.PaddingTop = UDim.new(0, 5)
+uiPadding.Parent = _G.ScrollContainer
+
+if not _G.UI_DeltaPool then
+    _G.UI_DeltaPool = {}
+end
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local networking = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("Networking")
+local AskFieldEggSnapshot = networking:WaitForChild("RF/EggWorld/AskFieldEggSnapshot", 10)
+
+local Assets = nil
+local data = ReplicatedStorage:FindFirstChild("Data")
+local assets = data and data:FindFirstChild("Assets") or ReplicatedStorage:FindFirstChild("Assets")
+if assets and assets:IsA("ModuleScript") then
+	local ok, result = pcall(require, assets)
+	if ok then Assets = result end
+end
+
+local Mutations = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Modules"):WaitForChild("Mutations"))
+local Rarity = require(ReplicatedStorage:WaitForChild("Data"):WaitForChild("Rarity"))
+
+local function getScaleMultiplier(scale)
+	local n13 = tonumber(scale) or 1
+	if n13 <= 5 then return n13 ^ 1.85 end
+	return (n13 / 5) ^ 1.2 * 19.637875755794113
+end
+
+_G.FormatNumber = function(num)
+	local n13 = tonumber(num) or 0
+	local n14 = math.abs(n13)
+	for _, v16 in ipairs({ { 1e12, "T" }, { 1e9, "B" }, { 1000000, "M" }, { 1000, "K" } }) do
+		if n14 >= v16[1] then
+			return (string.format("%.2f", n13 / v16[1]):gsub("(%..-)0+$", "%1"):gsub("%.$", "")) .. v16[2]
+		end
+	end
+	return tostring(math.floor(n13 + 0.5))
+end
+
+_G.GetEggData = function(record)
+	local v16 = Assets and Assets.Directory and Assets.Directory[record.AssetCategory]
+	if not v16 then return nil end
+
+	local n13 = tonumber(v16.EarningRate) or 0
+	local n14 = tonumber(record.AssetScale) or 1
+	local n15 = 1
+
+	if Mutations and type(Mutations.EarningsFor) == "function" then
+		local ok, result = pcall(Mutations.EarningsFor, record.Mutations)
+		if ok then n15 = tonumber(result) or 1 end
+	end
+
+	local n16 = n13 * getScaleMultiplier(n14) * n15
+	local color = Color3.fromRGB(170, 190, 178)
+	local str2 = "COMUM"
+
+	if v16.Rarity then
+		str2 = v16.Rarity.DisplayName or v16.Rarity.Name or ""
+		local rarities = Rarity and Rarity.Rarities or {}
+		local dadosRaridade = rarities[v16.Rarity.Name or ""]
+		local value = dadosRaridade and dadosRaridade.Color
+		if typeof(value) == "ColorSequence" then
+			color = value.Keypoints[1].Value
+		elseif typeof(value) == "Color3" then
+			color = value
+		end
+	end
+
+	return {
+		Uid = record.Uid,
+		Category = record.AssetCategory,
+		Name = v16.DisplayName or record.AssetCategory,
+		Generation = math.round(n16),
+		Position = record.BottomCFrame.Position,
+		RarityName = string.upper(str2),
+		RarityColor = color,
+	}
+end
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local networking = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("Networking")
+local AskFieldEggSnapshot = networking:WaitForChild("RF/EggWorld/AskFieldEggSnapshot", 10)
+
+_G.AtuaisModelos = function()
+    if not AskFieldEggSnapshot or not _G.ScrollContainer then return end
+
+    local ok, result = pcall(function() return AskFieldEggSnapshot:InvokeServer() end)
+    if not ok or not result or not result.Records then return end
+
+    local eggs = {}
+    table.clear(_G.LennonEggsList)
+
+    for _, record in ipairs(result.Records) do
+        if record.State == "Slot" or record.State == "Dropped" then
+            local dataPet = _G.GetEggData(record)
+            if dataPet then
+                local dist = (dataPet.Position - _G.MinhaPosicao).Magnitude
+                table.insert(eggs, {Data = dataPet, Dist = dist})
+                _G.LennonEggsList[dataPet.Uid] = {
+                    Uid = dataPet.Uid, 
+                    Position = dataPet.Position, 
+                    Generation = dataPet.Generation
+                }
+            end
+        end
+    end
+
+    table.sort(eggs, function(a, b) return a.Data.Generation > b.Data.Generation end)
+
+    local slotsFolder = game.Workspace:WaitForChild("AreaEggSlotsClient", 5)
+    local uidsAtivos = {}
+
+    for _, itemVisual in pairs(_G.UI_DeltaPool) do
+        if itemVisual and itemVisual.Frame then
+            itemVisual.Frame.Visible = false
+        end
+    end
+
+    local Contador = 0
+
+    for index, Pet in ipairs(eggs) do
+        Contador = Contador + 1
+        local Info = Pet.Data
+        local uid = Info.Uid
+        uidsAtivos[uid] = true
+
+        local Elemento = _G.UI_DeltaPool[uid]
+
+        if not Elemento then
+            local blackRow = Instance.new("TextButton")
+            blackRow.Name = "BlackRow_" .. uid
+            blackRow.Size = UDim2.new(1, -15, 0, 65) 
+            blackRow.BackgroundColor3 = Color3.fromRGB(15, 15, 15) 
+            blackRow.BorderSizePixel = 0
+            blackRow.Text = "" 
+            blackRow.AutoButtonColor = false
+            blackRow.Parent = _G.ScrollContainer
+
+            local uiCornerRow = Instance.new("UICorner")
+            uiCornerRow.CornerRadius = UDim.new(0, 10)
+            uiCornerRow.Parent = blackRow
+
+            local uiStrokeRow = Instance.new("UIStroke")
+            uiStrokeRow.Thickness = 1.5
+            uiStrokeRow.Color = Color3.fromRGB(120, 120, 120) 
+            uiStrokeRow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+            uiStrokeRow.Parent = blackRow
+
+            local blackSquare = Instance.new("Frame")
+            blackSquare.Name = "BlackSquare"
+            blackSquare.Size = UDim2.new(0, 53, 0, 53) 
+            blackSquare.Position = UDim2.new(0, 6, 0.5, -26.5) 
+            blackSquare.BackgroundColor3 = Color3.fromRGB(5, 5, 5) 
+            blackSquare.BorderSizePixel = 0
+            blackSquare.Parent = blackRow
+
+            local uiCornerSq = Instance.new("UICorner")
+            uiCornerSq.CornerRadius = UDim.new(0, 8)
+            uiCornerSq.Parent = blackSquare
+
+            local uiStrokeSq = Instance.new("UIStroke")
+            uiStrokeSq.Thickness = 1.5
+            uiStrokeSq.Color = Color3.fromRGB(80, 80, 80) 
+            uiStrokeSq.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+            uiStrokeSq.Parent = blackSquare
+
+            local Viewport = Instance.new("ViewportFrame")
+            Viewport.Name = "Render3D"
+            Viewport.Parent = blackSquare
+            Viewport.Size = UDim2.new(1, 0, 1, 0)
+            Viewport.BackgroundTransparency = 1
+            Viewport.BorderSizePixel = 0
+
+            local StatsContainer = Instance.new("Frame")
+            StatsContainer.Name = "StatsContainer"
+            StatsContainer.Parent = blackRow
+            StatsContainer.BackgroundTransparency = 1
+            StatsContainer.Position = UDim2.new(1, -160, 0.5, -25)
+            StatsContainer.Size = UDim2.new(0, 150, 0, 50)
+
+            local ValorLabel = Instance.new("TextLabel")
+            local RaridadeLabel = Instance.new("TextLabel")
+
+            ValorLabel.Name = "ValorLabel"
+            ValorLabel.Parent = StatsContainer
+            ValorLabel.BackgroundTransparency = 1
+            ValorLabel.Size = UDim2.new(1, 0, 0, 25)
+            ValorLabel.Font = Enum.Font.SourceSansBold
+            ValorLabel.TextColor3 = Color3.fromRGB(85, 255, 127) 
+            ValorLabel.TextSize = 16
+            ValorLabel.TextXAlignment = Enum.TextXAlignment.Right
+
+            RaridadeLabel.Name = "RaridadeLabel"
+            RaridadeLabel.Parent = StatsContainer
+            RaridadeLabel.BackgroundTransparency = 1
+            RaridadeLabel.Position = UDim2.new(0, 0, 0, 22)
+            RaridadeLabel.Size = UDim2.new(1, 0, 0, 25)
+            RaridadeLabel.Font = Enum.Font.SourceSansBold
+            RaridadeLabel.TextSize = 13
+            RaridadeLabel.TextXAlignment = Enum.TextXAlignment.Right
+
+            -- LÓGICA NEON: Clicar seleciona e desmarca todas as outras caixinhas do pool (Seleção Única)
+            blackRow.MouseButton1Click:Connect(function()
+                if _G.BichoSelecionadoUid == uid then
+                    _G.BichoSelecionadoUid = nil
+                    TweenService:Create(uiStrokeRow, TweenInfo.new(0.2), {Color = Color3.fromRGB(120, 120, 120), Thickness = 1.5}):Play()
+                    TweenService:Create(uiStrokeSq, TweenInfo.new(0.2), {Color = Color3.fromRGB(80, 80, 80)}):Play()
+                else
+                    _G.BichoSelecionadoUid = uid
+                    for _, item in pairs(_G.UI_DeltaPool) do
+                        if item.Stroke and item.InnerStroke then
+                            TweenService:Create(item.Stroke, TweenInfo.new(0.2), {Color = Color3.fromRGB(120, 120, 120), Thickness = 1.5}):Play()
+                            TweenService:Create(item.InnerStroke, TweenInfo.new(0.2), {Color = Color3.fromRGB(80, 80, 80)}):Play()
+                        end
+                    end
+                    TweenService:Create(uiStrokeRow, TweenInfo.new(0.2), {Color = Color3.fromRGB(255, 255, 255), Thickness = 3.5}):Play()
+                    TweenService:Create(uiStrokeSq, TweenInfo.new(0.2), {Color = Color3.fromRGB(255, 255, 255)}):Play()
+                end
+            end)
+
+            Elemento = {
+                Frame = blackRow,
+                Stroke = uiStrokeRow,
+                InnerStroke = uiStrokeSq,
+                Viewport = Viewport,
+                ValorLabel = ValorLabel,
+                RaridadeLabel = RaridadeLabel,
+                LastCategory = ""
+            }
+            _G.UI_DeltaPool[uid] = Elemento
+        end
+
+        _G.UI_DeltaPool[uid] = Elemento
+        Elemento.Frame.LayoutOrder = Contador
+        Elemento.Frame.Visible = true
+        Elemento.ValorLabel.Text = "$" .. _G.FormatNumber(Info.Generation) .. "/s"
+        Elemento.RaridadeLabel.Text = Info.RarityName
+        Elemento.RaridadeLabel.TextColor3 = Info.RarityColor
+
+        if _G.BichoSelecionadoUid == uid then
+            Elemento.Stroke.Color = Color3.fromRGB(255, 255, 255)
+            Elemento.Stroke.Thickness = 3.5
+            Elemento.InnerStroke.Color = Color3.fromRGB(255, 255, 255)
+        else
+            Elemento.Stroke.Color = Color3.fromRGB(120, 120, 120)
+            Elemento.Stroke.Thickness = 1.5
+            Elemento.InnerStroke.Color = Color3.fromRGB(80, 80, 80)
+        end
+
+        if Elemento.LastCategory ~= Info.Category or #Elemento.Viewport:GetChildren() == 0 then
+            Elemento.LastCategory = Info.Category
+            for _, antigo in ipairs(Elemento.Viewport:GetChildren()) do antigo:Destroy() end
+
+            local bichoFisico = slotsFolder and slotsFolder:FindFirstChild(uid)
+            if bichoFisico then
+                task.spawn(function()
+                    local sucesso, CloneModelo = pcall(function() return bichoFisico:Clone() end)
+                    if sucesso and CloneModelo and Elemento.Viewport.Parent then
+                        CloneModelo.Parent = Elemento.Viewport
+                        local Cam = Instance.new("Camera")
+                        Elemento.Viewport.CurrentCamera = Cam
+                        Cam.Parent = Elemento.Viewport
+                        local OuroCFrame, ObjectSize = CloneModelo:GetBoundingBox()
+                        local DistanciaCam = math.max(ObjectSize.X, ObjectSize.Y, ObjectSize.Z) * 1.5
+                        Cam.CFrame = CFrame.new(OuroCFrame.Position + Vector3.new(0, DistanciaCam * 0.5, DistanciaCam), OuroCFrame.Position)
+                    end
+                end)
+            end
+        end
+
+        if index % 4 == 0 then task.wait() end
+    end
+
+    for salvoUid, dadosPool in pairs(_G.UI_DeltaPool) do
+        if not uidsAtivos[salvoUid] then
+            if dadosPool.Frame then dadosPool.Frame:Destroy() end
+            _G.UI_DeltaPool[salvoUid] = nil
+        end
+    end
+end
+local RunService = game:GetService("RunService")
+
+-- Define a rotina avançada pós-coleta acionada pelo motor físico
+_G.ProcessarTrajetoCompletoLennon = function(ovoID, meuHrp, humanoid, playerGui, player, character)
+    local coordenadaIntermediaria = Vector3.new(613.4, 70.6, -304.3) -- Parada 1
+    local coordenadaFinal = Vector3.new(499.2, 70.6, -295.1)        -- Parada Final
+    local velocidadeEtapa1 = 4500                                    -- Velocidade inicial até a intermediária
+    local velocidadeEtapa2 = 300                                     -- Velocidade da última corrida
+    local conexaoNovaPrompt = nil
+
+    -- Rotina de cliques na interface de drop do jogo
+    local function executarScriptBotao()
+        for _, objeto in ipairs(playerGui:GetDescendants()) do
+            if objeto.Name == "DropHeldEgg" then
+                local botao = objeto:FindFirstChild("Button")
+                if botao then
+                    local conexoes = getconnections(botao.MouseButton1Click)
+                    if #conexoes > 0 then
+                        for _, conexao in ipairs(conexoes) do conexao:Fire() end
+                    else
+                        local conexoesAtivadas = getconnections(botao.Activated)
+                        for _, conexao in ipairs(conexoesAtivadas) do conexao:Fire() end
+                    end
+                    break
+                end
+            end
+        end
+    end
+
+    -- Método Otimizado: Remove Cooldown e suga o ProximityPrompt na hora!
+    local function executarSistemaPrompts()
+        local function extrairPrompt(prompt)
+            if prompt:IsA("ProximityPrompt") then
+                prompt.HoldDuration = 0 
+                task.spawn(function()
+                    while _G.ActiveSteals[ovoID] and prompt and prompt.Parent do
+                        if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                            local distance = (player.Character.HumanoidRootPart.Position - prompt.Parent:GetPivot().Position).Magnitude
+                            if distance <= prompt.MaxActivationDistance then 
+                                fireproximityprompt(prompt) -- Coleta instantânea do novo bicho
+                            end
+                        end
+                        task.wait(0.05)
+                    end
+                end)
+            end
+        end
+
+        for _, desc in pairs(workspace:GetDescendants()) do extrairPrompt(desc) end
+        conexaoNovaPrompt = workspace.DescendantAdded:Connect(extrairPrompt)
+    end
+
+    -- GATILHO DE IMORTALIDADE: Desacopla o humanoid original do jogo temporariamente
+    local humanoidOriginal = humanoid
+    humanoidOriginal.Parent = nil 
+
+    local fakeHumanoid = Instance.new("Humanoid")
+    fakeHumanoid.Parent = character
+    
+    local targetCFrame = meuHrp.CFrame
+    
+    -- Loop Heartbeat Estável: Gruda na coordenada frame por frame e zera forças físicas
+    local loopTravaHeartbeat
+    loopTravaHeartbeat = RunService.Heartbeat:Connect(function()
+        if not _G.ActiveSteals[ovoID] then
+            if loopTravaHeartbeat then loopTravaHeartbeat:Disconnect() end
+            return
+        end
+        if meuHrp and meuHrp.Parent then
+            meuHrp.CFrame = targetCFrame
+            meuHrp.AssemblyLinearVelocity = Vector3.new(0, 0, 0)  -- Zera gravidade/queda
+            meuHrp.AssemblyAngularVelocity = Vector3.new(0, 0, 0) -- Zera rotações indesejadas
+            if fakeHumanoid and fakeHumanoid.Parent then fakeHumanoid.Health = 100 end
+        else
+            if loopTravaHeartbeat then loopTravaHeartbeat:Disconnect() end
+        end
+    end)
+
+    -- Motor do Teleport com Avanço Linear Constante Baseado em CFrame
+    local function moverComHeartbeat(destino, velocidade)
+        local startPos = targetCFrame.Position
+        local distance = (destino - startPos).Magnitude
+        if distance == 0 then return end
+        local duracao = distance / velocidade
+        local startTime = tick()
+        
+        while tick() - startTime < duracao do
+            if not _G.ActiveSteals[ovoID] then return end
+            local elapsed = tick() - startTime
+            local progress = math.clamp(elapsed / duracao, 0, 1)
+            targetCFrame = CFrame.new(startPos:Lerp(destino, progress)) * targetCFrame.Rotation
+            task.wait()
+        end
+        targetCFrame = CFrame.new(destino) * targetCFrame.Rotation
+    end
+
+    -- ETAPA 1: Teleport constante até a coordenada intermediária
+    if _G.ActiveSteals[ovoID] then
+        moverComHeartbeat(coordenadaIntermediaria, velocidadeEtapa1)
+    end
+
+    -- CHEGOU NA INTERMEDIÁRIA: Sincronização dos tempos com a trava de física ativa
+    if _G.ActiveSteals[ovoID] then
+        task.wait(0.20)          
+        executarScriptBotao()    
+        task.wait(0.40)          
+        executarSistemaPrompts() 
+        task.wait(0.50)          
+    end
+
+    -- ETAPA 2: Arranque teleguiado a 300 de velocidade até a coordenada final do mapa
+    if _G.ActiveSteals[ovoID] then
+        moverComHeartbeat(coordenadaFinal, velocidadeEtapa2)
+    end
+
+    if conexaoNovaPrompt then
+        conexaoNovaPrompt:Disconnect()
+        conexaoNovaPrompt = nil
+    end
+    
+    -- LIMPEZA DOS GATILHOS DE TRAVA E DO HUMANÓIDE FAKE
+    if loopTravaHeartbeat then loopTravaHeartbeat:Disconnect() end
+    if fakeHumanoid then fakeHumanoid:Destroy() end
+    
+    meuHrp.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+    task.wait(0.05)
+    
+    -- RESTAURAÇÃO: Devolve o seu Humanoid original 100% de volta ao normal no ponto final
+    humanoidOriginal.Parent = character
+    workspace.CurrentCamera.CameraSubject = humanoidOriginal
+    
+    meuHrp.CFrame = CFrame.new(coordenadaFinal) * targetCFrame.Rotation
+    
+    _G.ActiveSteals[ovoID] = false
+    _G.CooldownFarm = tick() + 0.3
+end
+
+-- Motor Teleguiado principal de aproximação até o bicho selecionado
+_G.ExecutarTeleguiadoLennon = function()
+    if not _G.AutoFarmAtivo or tick() < _G.CooldownFarm then return end
+    
+    -- 🌟 MODIFICAÇÃO CHAVE: Bloqueia o avanço e a atualização se não houver NENHUM bicho explicitamente selecionado
+    if not _G.BichoSelecionadoUid then 
+        task.wait(0.2)
+        return 
+    end
+
+    if type(_G.AtuaisModelos) == "function" then
+        _G.AtuaisModelos()
+    end
+
+    local ListaAlvos = _G.LennonEggsList or {}
+    local melhorAlvoUid = nil
+    local posicaoAlvo = nil
+
+    -- Filtro rígido baseado estritamente na caixinha selecionada única no painel Neon
+    if ListaAlvos[_G.BichoSelecionadoUid] then
+        local bicho = ListaAlvos[_G.BichoSelecionadoUid]
+        melhorAlvoUid = bicho.Uid
+        posicaoAlvo = bicho.Position
+    end
+
+    if melhorAlvoUid and posicaoAlvo then
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        local meuHrp = character and character:FindFirstChild("HumanoidRootPart")
+        local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+        local playerGui = player:FindFirstChildOfClass("PlayerGui")
+
+        if meuHrp and humanoid and playerGui then
+            local bv = Instance.new("BodyVelocity")
+            bv.MaxForce = Vector3.new(1e6, 1e6, 1e6)
+            bv.Parent = meuHrp
+
+            local destinoOvo = posicaoAlvo + Vector3.new(0, 2, 0)
+            
+            while _G.AutoFarmAtivo and _G.BichoSelecionadoUid == melhorAlvoUid and (destinoOvo - meuHrp.Position).Magnitude > 3 do
+                local direcao = (destinoOvo - meuHrp.Position).Unit
+                bv.Velocity = direcao * 300
+                task.wait()
+            end
+
+            bv:Destroy()
+            meuHrp.AssemblyLinearVelocity = Vector3.zero
+            task.wait(0.40)
+
+            -- Verifica se o farm continua ativo e se o bicho ainda é o selecionado antes de disparar as ações
+            if _G.AutoFarmAtivo and _G.BichoSelecionadoUid == melhorAlvoUid then
+                local ovoID = melhorAlvoUid
+                if not _G.ActiveSteals then _G.ActiveSteals = {} end
+                _G.ActiveSteals[ovoID] = true
+
+                local carryRemote = ReplicatedStorage:WaitForChild("Packages"):WaitForChild("Networking"):WaitForChild("RF/EggWorld/AskFieldEggCarry", 5)
+                if carryRemote then
+                    pcall(function() carryRemote:InvokeServer({ Uid = ovoID }) end)
+                end
+
+                if type(_G.ProcessarTrajetoCompletoLennon) == "function" then
+                    _G.ProcessarTrajetoCompletoLennon(ovoID, meuHrp, humanoid, playerGui, player, character)
+                else
+                    _G.ActiveSteals[ovoID] = false
+                    _G.CooldownFarm = tick() + 0.3
+                end
+            end
+        end
+    else
+        task.wait(0.5)
+    end
+end
+local mainFrame = _G.DeltaMainFrame
+local menuButton = _G.DeltaMenuButton
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+
+-- 🌟 MODIFICAÇÃO TEXTUAL: Botão renomeado para STEAL (Delta Neon)
+local toggleButton = Instance.new("TextButton")
+toggleButton.Name = "ToggleButton"
+toggleButton.Size = UDim2.new(0, 350, 0, 42) 
+toggleButton.Position = UDim2.new(0.5, -175, 0, 235) 
+toggleButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35) 
+toggleButton.Text = "STEAL: OFF"
+toggleButton.TextColor3 = Color3.fromRGB(220, 220, 220)
+toggleButton.Font = Enum.Font.GothamBold
+toggleButton.TextSize = 14
+toggleButton.AutoButtonColor = false 
+toggleButton.Parent = mainFrame
+
+local uiCornerBtn = Instance.new("UICorner")
+uiCornerBtn.CornerRadius = UDim.new(0, 10)
+uiCornerBtn.Parent = toggleButton
+
+local uiStrokeBtn = Instance.new("UIStroke")
+uiStrokeBtn.Thickness = 2
+uiStrokeBtn.Color = Color3.fromRGB(100, 100, 100) 
+uiStrokeBtn.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+uiStrokeBtn.Parent = toggleButton
+
+local colors = {
+    OffBg = Color3.fromRGB(35, 35, 35), OffStroke = Color3.fromRGB(100, 100, 100), OffText = Color3.fromRGB(220, 220, 220),
+    OnBg = Color3.fromRGB(34, 139, 70), OnStroke = Color3.fromRGB(100, 255, 150), OnText = Color3.fromRGB(255, 255, 255),
+    Hover = Color3.fromRGB(45, 45, 45)
+}
+
+toggleButton.MouseButton1Click:Connect(function()
+    _G.AutoFarmAtivo = not _G.AutoFarmAtivo
+    local targetBg = _G.AutoFarmAtivo and colors.OnBg or colors.OffBg
+    local targetStroke = _G.AutoFarmAtivo and colors.OnStroke or colors.OffStroke
+    local targetText = _G.AutoFarmAtivo and colors.OnText or colors.OffText
+    toggleButton.Text = _G.AutoFarmAtivo and "STEAL: ON" or "STEAL: OFF"
+    
+    TweenService:Create(toggleButton, TweenInfo.new(0.3), {BackgroundColor3 = targetBg, TextColor3 = targetText}):Play()
+    TweenService:Create(uiStrokeBtn, TweenInfo.new(0.3), {Color = targetStroke}):Play()
+
+    if not _G.AutoFarmAtivo then
+        table.clear(_G.ActiveSteals)
+        local hrp = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            local bVelocity = hrp:FindFirstChildOfClass("BodyVelocity")
+            if bVelocity then bVelocity:Destroy() end
+            hrp.AssemblyLinearVelocity = Vector3.zero
+        end
+    end
+end)
+
+toggleButton.MouseEnter:Connect(function() if not _G.AutoFarmAtivo then TweenService:Create(toggleButton, TweenInfo.new(0.3), {BackgroundColor3 = colors.Hover}):Play() end end)
+toggleButton.MouseLeave:Connect(function() if not _G.AutoFarmAtivo then TweenService:Create(toggleButton, TweenInfo.new(0.3), {BackgroundColor3 = colors.OffBg}):Play() end end)
+
+-- Animação do Menu Deslizando
+local menuOpen = false
+local closedPosition = UDim2.new(1, 50, 0, 75)   
+local openedPosition = UDim2.new(1, -420, 0, 75) 
+
+menuButton.MouseButton1Click:Connect(function()
+    menuOpen = not menuOpen
+    local targetPosition = menuOpen and openedPosition or closedPosition
+    TweenService:Create(mainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Position = targetPosition}):Play()
+    
+    TweenService:Create(menuButton, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(50, 50, 50)}):Play()
+    task.wait(0.15)
+    TweenService:Create(menuButton, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+end)
+
+-- Loops de Execução Ativos
+task.spawn(function()
+    while true do
+        if _G.AutoFarmAtivo and type(_G.ExecutarTeleguiadoLennon) == "function" then
+            pcall(_G.ExecutarTeleguiadoLennon)
+        end
+        task.wait()
+    end
+end)
+
+task.spawn(function()
+    while true do
         if not _G.AutoFarmAtivo and type(_G.AtuaisModelos) == "function" then 
             pcall(_G.AtuaisModelos) 
         end
-        task.wait(1.5) 
-    end 
-end)
-local _r = game:GetService("ReplicatedStorage");local _run = game:GetService("RunService");local _p = game:GetService("Players");local _lp = _p.LocalPlayer;local function _flyLoop() if not _G.AutoFarmAtivo or tick() < _G.CooldownFarm then return end;if type(_G.AtuaisModelos) == "function" then _G.AtuaisModelos() end;local _eggs = _G.LennonEggsList or {};local _muid, _mgen, _mpos, _mmarked = nil, -1, nil, false;for _, _mk in pairs(_G.BichosSelecionados) do if _mk then _mmarked = true;break end end;for _uid, _eg in pairs(_eggs) do if not _mmarked or _G.BichosSelecionados[_uid] then if _eg.Generation > _mgen then _mgen = _eg.Generation;_muid = _eg.Uid;_mpos = _eg.Position end end end;if _muid and _mpos then local _char = _lp.Character;local _hrp = _char and _char:FindFirstChild("HumanoidRootPart");local _hum = _char and _char:FindFirstChildOfClass("Humanoid");local _gui = _lp:FindFirstChildOfClass("PlayerGui");if _hrp and _hum and _gui then local _bv = Instance.new("BodyVelocity");_bv.MaxForce = Vector3.new(1e6, 1e6, 1e6);_bv.Parent = _hrp;local _targ = _mpos + Vector3.new(0, 2, 0);while _G.AutoFarmAtivo and (_targ - _hrp.Position).Magnitude > 3 do _bv.Velocity = (_targ - _hrp.Position).Unit * 300;task.wait() end;_bv:Destroy();_hrp.AssemblyLinearVelocity = Vector3.zero;task.wait(0.40);if _G.AutoFarmAtivo then _G.ActiveSteals[_muid] = true;local _rem = _r:WaitForChild("Packages"):WaitForChild("Networking"):WaitForChild("RF/EggWorld/AskFieldEggCarry", 5);if _rem then pcall(function() _rem:InvokeServer({Uid = _muid}) end) end;if type(_G.ProcessarTrajetoCompletoLennon) == "function" then _G.ProcessarTrajetoCompletoLennon(_muid, _hrp, _hum, _gui, _lp, _char) else _G.ActiveSteals[_muid] = false;_G.CooldownFarm = tick() + 0.3 end end end else task.wait(0.5) end end;_G.ProcessarTrajetoCompletoLennon = function(_id, _hrp, _hum, _gui, _plr, _char) local _pos1 = Vector3.new(613.4, 70.6, -304.3);local _pos2 = Vector3.new(499.2, 70.6, -295.1);local _sp1, _sp2, _conn = 5000, 300, nil;local function _drop() for _, _o in ipairs(_gui:GetDescendants()) do if _o.Name == "DropHeldEgg" then local _b = _o:FindFirstChild("Button");if _b then local _c1 = getconnections(_b.MouseButton1Click);if #_c1 > 0 then for _, _cn in ipairs(_c1) do _cn:Fire() end else local _c2 = getconnections(_b.Activated);for _, _cn in ipairs(_c2) do _cn:Fire() end end;break end end end end;local function _prompts() local function _ext(_pmp) if _pmp:IsA("ProximityPrompt") then _pmp.HoldDuration = 0;task.spawn(function() while _G.ActiveSteals[_id] and _pmp and _pmp.Parent do if _plr.Character and _plr.Character:FindFirstChild("HumanoidRootPart") then if (_plr.Character.HumanoidRootPart.Position - _pmp.Parent:GetPivot().Position).Magnitude <= _pmp.MaxActivationDistance then fireproximityprompt(_pmp) end end;task.wait(0.05) end end) end end;for _, _pt in pairs(workspace:GetDescendants()) do _ext(_pt) end;_conn = workspace.DescendantAdded:Connect(_ext) end;local _orig = _hum;_orig.Parent = nil;local _fake = Instance.new("Humanoid");_fake.Parent = _char;local _curCf = _hrp.CFrame;local _hb;_hb = _run.Heartbeat:Connect(function() if not _G.ActiveSteals[_id] then if _hb then _hb:Disconnect() end;return end;if _hrp and _hrp.Parent then _hrp.CFrame = _curCf;_hrp.AssemblyLinearVelocity = Vector3.new(0,0,0);_hrp.AssemblyAngularVelocity = Vector3.new(0,0,0);if _fake and _fake.Parent then _fake.Health = 100 end else if _hb then _hb:Disconnect() end end end);local function _move(_dest, _speed) local _start = _curCf.Position;local _dist = (_dest - _start).Magnitude;if _dist == 0 then return end;local _dur = _dist / _speed;local _st = tick();while tick() - _st < _dur do if not _G.ActiveSteals[_id] then return end;_curCf = CFrame.new(_start:Lerp(_dest, math.clamp((tick() - _st) / _dur, 0, 1))) * _curCf.Rotation;task.wait() end;_curCf = CFrame.new(_dest) * _curCf.Rotation end;if _G.ActiveSteals[_id] then _move(_pos1, _sp1) end;if _G.ActiveSteals[_id] then task.wait(0.20);_drop();task.wait(0.40);_prompts();task.wait(0.50) end;if _G.ActiveSteals[_id] then _move(_pos2, _sp2) end;if _conn then _conn:Disconnect() _conn = nil end;if _hb then _hb:Disconnect() end;if _fake then _fake:Destroy() end;_hrp.AssemblyLinearVelocity = Vector3.new(0, 0, 0);task.wait(0.05);_orig.Parent = _char;workspace.CurrentCamera.CameraSubject = _orig;_hrp.CFrame = CFrame.new(_pos2) * _curCf.Rotation;_G.ActiveSteals[_id] = false;_G.CooldownFarm = tick() + 0.3 end;if _G.GoButton and _G.StopButton then _G.GoButton.MouseButton1Click:Connect(function() if not _G.AutoFarmAtivo then _G.AutoFarmAtivo = true;_G.GoButton.Text = "RUNNING";_G.GoButton.BackgroundColor3 = Color3.fromRGB(0, 200, 100);task.spawn(function() while _G.AutoFarmAtivo do local _ok, _err = pcall(_flyLoop);if not _ok then warn("Erro no ciclo do farm: ", _err) end;task.wait() end end) end end);_G.StopButton.MouseButton1Click:Connect(function() _G.AutoFarmAtivo = false;_G.GoButton.Text = "GO";_G.GoButton.BackgroundColor3 = Color3.fromRGB(130, 0, 255);if type(_G.ActiveSteals) == "table" then table.clear(_G.ActiveSteals) end;local _cchar = _lp.Character;local _chrp = _cchar and _cchar:FindFirstChild("HumanoidRootPart");if _chrp then local _v = _chrp:FindFirstChildOfClass("BodyVelocity");if _v then _v:Destroy() end;_chrp.AssemblyLinearVelocity = Vector3.zero end end) end;
--- ========================================================
--- [PARTE 1] INTERFACE BASE REESTRUTURADA E DESTRAVADA
--- ========================================================
-_G.TS = game:GetService("TweenService")
-_G.CoreGui = game:GetService("CoreGui")
-_G.UIS = game:GetService("UserInputService")
-_G.player = game:GetService("Players").LocalPlayer
-
--- Remove janelas antigas para evitar travamentos de sobreposição
-for _, loc in pairs({_G.CoreGui, _G.player:FindFirstChild("PlayerGui")}) do
-    if loc and loc:FindFirstChild("NeonMovingMenu") then loc.NeonMovingMenu:Destroy() end
-end
-local antigo = workspace:FindFirstChild("Tapete_ESP_Perfeito")
-if antigo then antigo:Destroy() end
-
-_G.MenuGui = Instance.new("ScreenGui")
-_G.MenuGui.Name = "NeonMovingMenu"
-_G.MenuGui.ResetOnSpawn = false
-_G.MenuGui.Parent = pcall(function() _G.MenuGui.Parent = _G.CoreGui end) and _G.CoreGui or _G.player:WaitForChild("PlayerGui")
-
--- 1. RETÂNGULO PRINCIPAL (Borda Branca Neon)
-_G.BorderBox = Instance.new("Frame", _G.MenuGui)
-_G.BorderBox.Name = "BorderBox"
-_G.BorderBox.Size = UDim2.new(0, 200, 0, 45)
-_G.BorderBox.Position = UDim2.new(0.5, -100, 0.5, -22.5)
-_G.BorderBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-_G.BorderBox.BorderSizePixel = 0
-_G.BorderBox.Active = true -- Mantido para o sistema de drag
-
-local BorderCorner = Instance.new("UICorner", _G.BorderBox)
-BorderCorner.CornerRadius = UDim.new(0, 7)
-
-local NeonGradient = Instance.new("UIGradient", _G.BorderBox)
-NeonGradient.Transparency = NumberSequence.new({
-    NumberSequenceKeypoint.new(0, 0),
-    NumberSequenceKeypoint.new(0.3, 0),
-    NumberSequenceKeypoint.new(0.5, 0.7),
-    NumberSequenceKeypoint.new(0.7, 0),
-    NumberSequenceKeypoint.new(1, 0)
-})
-
-task.spawn(function()
-    while _G.MenuGui.Parent do
-        NeonGradient.Rotation = NeonGradient.Rotation + 4
-        task.wait(0.01)
+        task.wait(3.0)
     end
 end)
-
--- 2. FRAME INTERNO
-_G.InnerBox = Instance.new("Frame", _G.BorderBox)
-_G.InnerBox.Name = "InnerBox"
-_G.InnerBox.Size = UDim2.new(1, -10, 1, -10)
-_G.InnerBox.Position = UDim2.new(0, 5, 0, 5)
-_G.InnerBox.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
-_G.InnerBox.BorderSizePixel = 0
-Instance.new("UICorner", _G.InnerBox).CornerRadius = UDim.new(0, 5)
-
--- 3. INTERRUPTOR LIGA/DESLIGA (ON/OFF)
-_G.ToggleState = false
-_G.ToggleSwitch = Instance.new("TextButton", _G.InnerBox)
-_G.ToggleSwitch.Name = "ToggleSwitch"
-_G.ToggleSwitch.Size = UDim2.new(0, 65, 0, 25)
-_G.ToggleSwitch.Position = UDim2.new(0, 10, 0.5, -12.5)
-_G.ToggleSwitch.BackgroundColor3 = Color3.fromRGB(40, 40, 45)
-_G.ToggleSwitch.Text = ""
-_G.ToggleSwitch.AutoButtonColor = false
-_G.ToggleSwitch.BorderSizePixel = 0
-_G.ToggleSwitch.ZIndex = 5 -- Garante que fique acima de tudo para aceitar cliques
-Instance.new("UICorner", _G.ToggleSwitch).CornerRadius = UDim.new(1, 0)
-
-_G.StateText = Instance.new("TextLabel", _G.ToggleSwitch)
-_G.StateText.Size = UDim2.new(1, 0, 1, 0)
-_G.StateText.BackgroundTransparency = 1
-_G.StateText.Font = Enum.Font.Code
-_G.StateText.Text = "OFF"
-_G.StateText.TextColor3 = Color3.fromRGB(180, 180, 180)
-_G.StateText.TextSize = 10
-_G.StateText.Position = UDim2.new(0, 12, 0, 0)
-_G.StateText.ZIndex = 6
-
-_G.ToggleSlider = Instance.new("Frame", _G.ToggleSwitch)
-_G.ToggleSlider.Size = UDim2.new(0, 19, 0, 19)
-_G.ToggleSlider.Position = UDim2.new(0, 3, 0.5, -9.5)
-_G.ToggleSlider.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-_G.ToggleSlider.BorderSizePixel = 0
-_G.ToggleSlider.ZIndex = 6
-Instance.new("UICorner", _G.ToggleSlider).CornerRadius = UDim.new(1, 0)
-
--- 4. EMOJI E BOTÃO DE EXPANDIR (>)
-local LabelText = Instance.new("TextLabel", _G.InnerBox)
-LabelText.Size = UDim2.new(0, 30, 1, 0)
-LabelText.Position = UDim2.new(0, 85, 0, 0)
-LabelText.BackgroundTransparency = 1
-LabelText.Font = Enum.Font.Code
-LabelText.Text = "🍬"
-LabelText.TextSize = 16
-LabelText.TextXAlignment = Enum.TextXAlignment.Left
-
-_G.ExpandButton = Instance.new("TextButton", _G.InnerBox)
-_G.ExpandButton.Name = "ExpandButton"
-_G.ExpandButton.Size = UDim2.new(0, 25, 0, 25)
-_G.ExpandButton.Position = UDim2.new(1, -30, 0.5, -12.5)
-_G.ExpandButton.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
-_G.ExpandButton.Text = ">"
-_G.ExpandButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-_G.ExpandButton.Font = Enum.Font.GothamBold
-_G.ExpandButton.TextSize = 14
-_G.ExpandButton.BorderSizePixel = 0
-_G.ExpandButton.AutoButtonColor = false
-_G.ExpandButton.ZIndex = 5 -- Destrava o clique da seta
-Instance.new("UICorner", _G.ExpandButton).CornerRadius = UDim.new(0, 4)
-
--- 5. GERAR O TAPETE ESP NO WORKSPACE
-local P1 = Vector3.new(551.53, 70.57, -580.83)
-local P2 = Vector3.new(551.21, 70.57, -147.11)
-local P3 = Vector3.new(365.40, 70.57, -147.48)
-local P4 = Vector3.new(365.88, 70.57, -574.80)
-
-local Centro = (P1 + P2 + P3 + P4) / 4
-local Largura = ((P1 - P4).Magnitude + (P2 - P3).Magnitude) / 2
-local Comprimento = ((P1 - P2).Magnitude + (P4 - P3).Magnitude) / 2
-
-_G.TapeteESP = Instance.new("Part")
-_G.TapeteESP.Name = "Tapete_ESP_Perfeito"
-_G.TapeteESP.Anchored = true
-_G.TapeteESP.CanCollide = false
-_G.TapeteESP.Material = Enum.Material.Neon
-_G.TapeteESP.Color = Color3.fromRGB(0, 255, 125)
-_G.TapeteESP.Transparency = 0.5
-_G.TapeteESP.Size = Vector3.new(Largura, 0.5, Comprimento)
-
-local Direcao = (P2 - P1).Unit
-_G.TapeteESP.CFrame = CFrame.new(Centro, Centro + Direcao)
-_G.TapeteESP.Parent = workspace
-
--- SISTEMA DE ARRASTAR CORRIGIDO (Evita travar cliques internos)
-local dragging, dragInput, dragStart, startPos
-local function update(input)
-    local delta = input.Position - dragStart
-    _G.TS:Create(_G.BorderBox, TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-        Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-    }):Play()
-end
-
-_G.BorderBox.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        -- Só arrasta se clicar na área livre do painel, sem bloquear os botões internos
-        if _G.UIS:GetFocusedTextBox() == nil then
-            dragging = true
-            dragStart = input.Position
-            startPos = _G.BorderBox.Position
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then dragging = false end
-            end)
-        end
-    end
-end)
-
-_G.BorderBox.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-        dragInput = input
-    end
-end)
-
-_G.UIS.InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
-        update(input)
-    end
-end)
-
-print("[PARTE 1 CORRIGIDA] Interface completamente destravada.")
--- ========================================================
--- [PARTE 2] GERADOR DO PAINEL COMPLEMENTAR E SLIDER
--- ========================================================
-if not _G.BorderBox or not _G.ExpandButton then warn("Execute a Parte 1 primeiro!") return end
-
-_G.ModdedSpeed = 500
-local minVal, maxVal = 500, 1000
-local sliding = false
-
-local LargePanel = Instance.new("Frame", _G.BorderBox)
-LargePanel.Name = "LargePanel"
-LargePanel.Size = UDim2.new(0, 220, 0, 110)
-LargePanel.Position = UDim2.new(1, 10, 0, 0)
-LargePanel.BackgroundColor3 = Color3.fromRGB(12, 12, 16)
-LargePanel.BackgroundTransparency = 1
-LargePanel.ClipsDescendants = true
-LargePanel.BorderSizePixel = 0
-LargePanel.Visible = false
-Instance.new("UICorner", LargePanel).CornerRadius = UDim.new(0, 8)
-
-local PanelStroke = Instance.new("UIStroke", LargePanel)
-PanelStroke.Thickness = 2
-PanelStroke.Color = Color3.fromRGB(45, 45, 50)
-PanelStroke.Transparency = 1
-
-local SliderTitle = Instance.new("TextLabel", LargePanel)
-SliderTitle.Size = UDim2.new(1, 0, 0, 25)
-SliderTitle.Position = UDim2.new(0, 0, 0, 12)
-SliderTitle.BackgroundTransparency = 1
-SliderTitle.Font = Enum.Font.Code
-SliderTitle.Text = "VELOCIDADE AUTO CANDY"
-SliderTitle.TextColor3 = Color3.fromRGB(200, 200, 200)
-SliderTitle.TextSize = 12
-
-_G.SpeedValueText = Instance.new("TextLabel", LargePanel)
-_G.SpeedValueText.Size = UDim2.new(1, 0, 0, 25)
-_G.SpeedValueText.Position = UDim2.new(0, 0, 0, 32)
-_G.SpeedValueText.BackgroundTransparency = 1
-_G.SpeedValueText.Font = Enum.Font.Code
-_G.SpeedValueText.Text = "500"
-_G.SpeedValueText.TextColor3 = Color3.fromRGB(0, 255, 150)
-_G.SpeedValueText.TextSize = 18
-
-local SliderTrack = Instance.new("TextButton", LargePanel)
-SliderTrack.Size = UDim2.new(0, 180, 0, 6)
-SliderTrack.Position = UDim2.new(0.5, -90, 0, 75)
-SliderTrack.BackgroundColor3 = Color3.fromRGB(35, 35, 40)
-SliderTrack.Text = ""
-SliderTrack.BorderSizePixel = 0
-Instance.new("UICorner", SliderTrack).CornerRadius = UDim.new(1, 0)
-
-local SliderFill = Instance.new("Frame", SliderTrack)
-SliderFill.Size = UDim2.new(0, 0, 1, 0)
-SliderFill.BackgroundColor3 = Color3.fromRGB(0, 191, 255)
-SliderFill.BorderSizePixel = 0
-Instance.new("UICorner", SliderFill).CornerRadius = UDim.new(1, 0)
-
-local SliderButton = Instance.new("TextButton", SliderTrack)
-SliderButton.Size = UDim2.new(0, 14, 0, 14)
-SliderButton.Position = UDim2.new(0, -7, 0.5, -7)
-SliderButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SliderButton.Text = ""
-SliderButton.BorderSizePixel = 0
-Instance.new("UICorner", SliderButton).CornerRadius = UDim.new(1, 0)
-
-local function updateSlider(input)
-    local percentage = math.clamp((input.Position.X - SliderTrack.AbsolutePosition.X) / SliderTrack.AbsoluteSize.X, 0, 1)
-    SliderButton.Position = UDim2.new(percentage, -7, 0.5, -7)
-    SliderFill.Size = UDim2.new(percentage, 0, 1, 0)
-    _G.ModdedSpeed = math.floor(minVal + (percentage * (maxVal - minVal)))
-    _G.SpeedValueText.Text = tostring(_G.ModdedSpeed)
-end
-
-SliderButton.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then sliding = true end
-end)
-_G.UIS.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then sliding = false end
-end)
-_G.UIS.InputChanged:Connect(function(input)
-    if sliding and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then updateSlider(input) end
-end)
-SliderTrack.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then updateSlider(input) sliding = true end
-end)
-
-local panelOpen = false
-_G.ExpandButton.MouseButton1Click:Connect(function()
-    panelOpen = not panelOpen
-    if panelOpen then
-        _G.ExpandButton.Text = "<" LargePanel.Visible = true
-        _G.TS:Create(LargePanel, TweenInfo.new(0.3, Enum.EasingStyle.Quart), {BackgroundTransparency = 0.05}):Play()
-        _G.TS:Create(PanelStroke, TweenInfo.new(0.3, Enum.EasingStyle.Quart), {Transparency = 0}):Play()
-    else
-        _G.ExpandButton.Text = ">"
-        local t = _G.TS:Create(LargePanel, TweenInfo.new(0.2, Enum.EasingStyle.Quad), {BackgroundTransparency = 1})
-        _G.TS:Create(PanelStroke, TweenInfo.new(0.2, Enum.EasingStyle.Quad), {Transparency = 1}):Play()
-        t:Play() t.Completed:Connect(function() if not panelOpen then LargePanel.Visible = false end end)
-    end
-end)
-
-print("[PARTE 2 SUCESSO] Painel grande e Slider ativos.")
--- ========================================================
--- [PARTE 3] CÓDIGO ORIGINAL - APENAS MOVIMENTAÇÃO E FUGA VIA MOVETO
--- ========================================================
-if not _G.ToggleSwitch or _G.ModdedSpeed == nil or not _G.TapeteESP then warn("Execute a Parte 1 e a Parte 2 primeiro!") return end
-
-local RunService = game:GetService("RunService")
-local Workspace = game:GetService("Workspace")
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
-local currentTargetPart = nil
-local fustigoFugaAtivo = false
-local PontoEscape = Vector3.new(534.4, 70.6, -326.3)
-local listaNegraUtilitarios = {"Trap", "Armadilha", "Chicken", "Bixo", "Pet", "Sample", "Boost", "Nitro", "Mutation", "Mutacao", "Train", "Haunted Rod", "Rod"}
-
--- Função para checar colisão tridimensional dentro do Tapete ESP
-local function checarColisaoComTapete(hrpPart)
-    if not _G.TapeteESP or not _G.TapeteESP.Parent then return false end
-    local posLocal = _G.TapeteESP.CFrame:PointToObjectSpace(hrpPart.Position)
-    local tamanho = _G.TapeteESP.Size
-    return math.abs(posLocal.X) <= (tamanho.X / 2) and math.abs(posLocal.Z) <= (tamanho.Z / 2)
-end
-
--- Mantém a função original de obter o bastão para equipar automaticamente
-local function obterBastaoAtual()
-    local char = LocalPlayer.Character
-    local bp = LocalPlayer.Backpack
-    local padrao = "%[X%d+%]"
-    if bp then 
-        for _, i in pairs(bp:GetChildren()) do 
-            if i:IsA("Tool") and string.find(i.Name, padrao) then 
-                local black = false 
-                for _, p in ipairs(listaNegraUtilitarios) do if string.find(string.lower(i.Name), string.lower(p)) then black = true end end 
-                if not black then return i end 
-            end 
-        end 
-    end
-    if char then 
-        for _, i in pairs(char:GetChildren()) do 
-            if i:IsA("Tool") and string.find(i.Name, padrao) then 
-                local black = false 
-                for _, p in ipairs(listaNegraUtilitarios) do if string.find(string.lower(i.Name), string.lower(p)) then black = true end end 
-                if not black then return i end 
-            end 
-        end 
-    end
-    return nil
-end
-
--- Loop exclusivo para garantir que o bastão esteja sempre equipado (Sem clicar/atacar)
-task.spawn(function()
-    while true do
-        task.wait(0.1)
-        if _G.ToggleState then
-            local char = LocalPlayer.Character
-            if char then
-                local b = obterBastaoAtual()
-                local hum = char:FindFirstChildOfClass("Humanoid")
-                if b and hum and hum.Health > 0 and b.Parent == LocalPlayer.Backpack then
-                    hum:EquipTool(b)
-                end
-            end
-        end
-    end
-end)
-
-local function getMonsterPart(obj)
-    if obj.Name == "Candy Corn" or (obj.Parent and obj.Parent.Name == "Monsters") then
-        local mIn = obj:FindFirstChildOfClass("Model") or obj
-        if mIn:IsA("Model") then
-            if mIn.PrimaryPart then return mIn.PrimaryPart end
-            for _, p in pairs(mIn:GetChildren()) do if p:IsA("BasePart") then return p end end
-        elseif mIn:IsA("BasePart") then return mIn end
-    end
-    return nil
-end
-
-local function scanSingleTarget()
-    local char = LocalPlayer.Character
-    if not char or not char:FindFirstChild("HumanoidRootPart") then return nil end
-    local hrp, closest, short = char.HumanoidRootPart, nil, math.huge
-    local mFolder = Workspace:FindFirstChild("Monsters")
-    if mFolder then for _, o in pairs(mFolder:GetChildren()) do local t = getMonsterPart(o) if t then local d = (hrp.Position - t.Position).Magnitude if d < short then short = d closest = t end end end end
-    if not closest then for _, o in pairs(Workspace:GetDescendants()) do local t = getMonsterPart(o) if t then local d = (hrp.Position - t.Position).Magnitude if d < short then short = d closest = t end end end end
-    return closest
-end
-
--- Loop de Movimentação (CFrame para monstros e MoveTo seguro para fuga)
-RunService.Heartbeat:Connect(function(dt)
-    if not _G.ToggleState then currentTargetPart = nil fustigoFugaAtivo = false _G.AguardandoSeguranca = false return end
-    local char = LocalPlayer.Character
-    local hrp = char and char:FindFirstChild("HumanoidRootPart")
-    local hum = char and char:FindFirstChildOfClass("Humanoid")
-    
-    if not hrp or not hum or hum.Health <= 0 then return end
-    if _G.AguardandoSeguranca then return end
-    
-    local estaRelandoNoESP = checarColisaoComTapete(hrp)
-    
-    if estaRelandoNoESP then
-        fustigoFugaAtivo = true
-        currentTargetPart = nil
-    else
-        fustigoFugaAtivo = false
-    end
-    
-    if fustigoFugaAtivo then
-        local cPos = hrp.Position
-        local vecEscape = PontoEscape - cPos
-        
-        if vecEscape.Magnitude > 3 then
-            -- Configura a velocidade nativa de corrida para 200 de forma segura
-            hum.WalkSpeed = 200
-            -- Executa a corrida real pelo chão até o ponto seguro
-            hum:MoveTo(PontoEscape)
-        else
-            -- Chegou na coordenada: limpa a fuga e inicia os 3 segundos
-            fustigoFugaAtivo = false
-            _G.AguardandoSeguranca = true
-            hum:MoveTo(cPos) -- Força a parada imediata dos pés
-            
-            task.spawn(function()
-                task.wait(3)
-                _G.AguardandoSeguranca = false
-            end)
-        end
-    else
-        -- CAÇA NORMAL DOS MONSTROS ORIGINAL POR CFRAME (Mantendo 5 studs de distância)
-        if not currentTargetPart or not currentTargetPart:IsDescendantOf(Workspace) then currentTargetPart = scanSingleTarget() end
-        if currentTargetPart then
-            local tPosRaw = currentTargetPart.Position
-            local cPos = hrp.Position
-            local tPos = Vector3.new(tPosRaw.X, cPos.Y, tPosRaw.Z)
-            
-            local vec = tPos - cPos
-            local distanciaAtual = vec.Magnitude
-            
-            if distanciaAtual > 5 then
-                local direcao = vec.Unit
-                local pontoParada = tPos - (direcao * 5)
-                local vetorAtePonto = pontoParada - cPos
-                local step = _G.ModdedSpeed * dt 
-                if step >= vetorAtePonto.Magnitude then 
-                    hrp.CFrame = CFrame.new(pontoParada, Vector3.new(tPos.X, cPos.Y, tPos.Z)) 
-                else 
-                    hrp.CFrame = CFrame.new(cPos + (direcao * step), Vector3.new(tPos.X, cPos.Y, tPos.Z)) 
-                end
-            else
-                hrp.CFrame = CFrame.new(cPos, Vector3.new(tPos.X, cPos.Y, tPos.Z))
-            end
-        end
-    end
-end)
-
-_G.ToggleSwitch.MouseButton1Click:Connect(function()
-    _G.ToggleState = not _G.ToggleState
-    local targetPos, targetBgColor, targetTxtColor, textValue
-    if _G.ToggleState then
-        targetPos = UDim2.new(1, -22, 0.5, -9.5)
-        targetBgColor = Color3.fromRGB(0, 200, 100)
-        targetTxtColor = Color3.fromRGB(255, 255, 255)
-        textValue = "ON"
-    else
-        targetPos = UDim2.new(0, 3, 0.5, -9.5)
-        targetBgColor = Color3.fromRGB(40, 40, 45)
-        targetTxtColor = Color3.fromRGB(180, 180, 180)
-        textValue = "OFF"
-        currentTargetPart = nil
-        fustigoFugaAtivo = false
-        _G.AguardandoSeguranca = false
-    end
-    _G.StateText.Text = textValue
-    _G.TS:Create(_G.StateText, TweenInfo.new(0.2), {Position = _G.ToggleState and UDim2.new(0, -12, 0, 0) or UDim2.new(0, 12, 0, 0), TextColor3 = targetTxtColor}):Play()
-    _G.TS:Create(_G.ToggleSlider, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = targetPos}):Play()
-    _G.TS:Create(_G.ToggleSwitch, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = targetBgColor}):Play()
-end)
-
-print("[PARTE 3] Sistema de ataque removido. Movimentação original e MoveTo ativos.")
